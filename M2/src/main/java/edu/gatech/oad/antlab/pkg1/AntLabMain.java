@@ -25,10 +25,7 @@ import edu.gatech.oad.antlab.pkg2.*;
 
     /**antlab22.java message class*/
     private AntLab22 ant22;
-<<<<<<< HEAD
-=======
 
->>>>>>> thanh
     /**antlab31 java message class which is contained in a jar resource file*/
     private AntLab31 ant31;
 
@@ -53,7 +50,7 @@ import edu.gatech.oad.antlab.pkg2.*;
      * out to the console
      *
      */
-<<<<<<< HEAD
+
     public void printOutMessage() {        String toPrint =
             ant11.getMessage() + ant12.getMessage() + ant21.getMessage()
           + ant22.getMessage() + ant31.getMessage();
