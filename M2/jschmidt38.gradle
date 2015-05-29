@@ -5,28 +5,17 @@ sourceCompatibility = 1.5
 version = '1.0'
 jar {
     manifest {
-        attributes 'Implementation-Title': 'Gradle Quickstart',
-                   'Implementation-Version': version
+        attributes 'Implementation-Title': 'Gradle Quickstart - test',
+                   'Implementation-Version': version,
+                   'Main-Class' : 'edu.gatech.oad.antlab.pkg1.AntLabMain', 
+               	   'Class-Path' : '../../lib/resources.jar'
     }
 }
 
-repositories {
-    mavenCentral()
-}
 
 dependencies {
-    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
-    testCompile group: 'junit', name: 'junit', version: '4.+'
+    compile files('lib/resources.jar')
 }
 
-test {
-    systemProperties 'property': 'value'
-}
 
-uploadArchives {
-    repositories {
-       flatDir {
-           dirs 'repos'
-       }
-    }
-}
+
