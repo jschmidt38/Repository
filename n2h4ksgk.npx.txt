@@ -1,0 +1,44 @@
+﻿Basic web page movement, please add login function
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   .gradle/2.2/taskArtifacts/cache.properties
+#	new file:   .gradle/2.2/taskArtifacts/cache.properties.lock
+#	new file:   .gradle/2.2/taskArtifacts/fileHashes.bin
+#	new file:   .gradle/2.2/taskArtifacts/fileSnapshots.bin
+#	new file:   .gradle/2.2/taskArtifacts/outputFileStates.bin
+#	new file:   .gradle/2.2/taskArtifacts/taskArtifacts.bin
+#	new file:   .idea/.name
+#	new file:   .idea/artifacts/Gradle___Repository___Repository_war.xml
+#	new file:   .idea/artifacts/Gradle___Repository___Repository_war__exploded_.xml
+#	new file:   .idea/compiler.xml
+#	new file:   .idea/copyright/profiles_settings.xml
+#	new file:   .idea/gradle.xml
+#	new file:   .idea/libraries/Gradle__com_sun_faces_jsf_api_2_2_11.xml
+#	new file:   .idea/libraries/Gradle__com_sun_faces_jsf_impl_2_2_11.xml
+#	new file:   .idea/libraries/Gradle__javax_servlet_servlet_api_2_5.xml
+#	new file:   .idea/libraries/Gradle__junit_junit_4_11.xml
+#	new file:   .idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3.xml
+#	new file:   .idea/libraries/Gradle__org_primefaces_primefaces_5_2.xml
+#	new file:   .idea/misc.xml
+#	new file:   .idea/modules.xml
+#	new file:   .idea/uiDesigner.xml
+#	new file:   .idea/vcs.xml
+#	new file:   .idea/workspace.xml
+#	new file:   Repository.iml
+#	new file:   build/classes/artifacts/Repository/Repository.war
+#	new file:   build/classes/artifacts/Repository/exploded/Repository.war/META-INF/MANIFEST.MF
+#	new file:   build/classes/artifacts/Repository/exploded/Repository.war/index.xhtml
+#	new file:   build/classes/main/User.class
+#	new file:   build/libs/Repository.war
+#	new file:   build/tmp/war/MANIFEST.MF
+#	modified:   src/main/java/User.java
+#	new file:   src/main/webapp/CSS/style.css
+#	modified:   src/main/webapp/index.xhtml
+#	new file:   src/main/webapp/loggedin.xhtml
+#	new file:   src/main/webapp/loggedout.xhtml
+#
+
