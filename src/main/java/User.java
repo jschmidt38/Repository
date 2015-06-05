@@ -1,16 +1,17 @@
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
 public class User {
     private String username;
     private String password;
-    private boolean isUser;
+    private boolean rejected;
 
     public User() {
         System.out.println("Making user");
-        isUser = false;
     }
 
     public String getUsername() {
@@ -26,15 +27,19 @@ public class User {
     public void setPassword(String pass) {
         password = pass;
     }
-    public String getIsUser() {
-        if (username.compareTo("Admin") == 1){
-            isUser = true;
-            return "Go Ahead";
+
+    public boolean isRejected() {
+        return rejected;
+    }
+
+    public String login() {
+        if(username.equals("user") && password.equals("user")) {
+            rejected = false;
+            return "loggedin";
         }
-        else {
-            isUser = false;
-            return "nope";
-        }
+        rejected = true;
+//        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Invalid login", "Please try again"));
+        return "index";
     }
 }
 
