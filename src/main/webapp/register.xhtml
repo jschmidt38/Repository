@@ -8,10 +8,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <f:view>
+    <h:head>
+        <p:outputLabel value="Please enter registration information" />
+    </h:head>
     <h:form id="loginForm">
         Name: <p:inputText value="#{userBean.id}" /> <br></br>
         Pass: <p:password value="#{userBean.pass}" /> <br></br>
         <p:commandButton action="#{userBean.addUser()}" value="Submit" update="loginForm" />
+        <p:button value="Cancel" href="welcomePage.xhtml" />
     </h:form>
 </f:view>
 </html>
