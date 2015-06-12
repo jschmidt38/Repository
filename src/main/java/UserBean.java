@@ -1,12 +1,12 @@
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 /**
  * Created by thanh on 6/10/15.
  */
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class UserBean {
 
     private String id;
@@ -15,7 +15,7 @@ public class UserBean {
     private UserManager manager;
 
     public UserBean() {
-        manager = new UserManager();
+        manager = UserManager.getInstance();
     }
 
     public void setId(String id) {

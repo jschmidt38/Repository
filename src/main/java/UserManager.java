@@ -1,33 +1,46 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by thanh on 6/10/15.
  */
 public class UserManager {
 
-    private ArrayList<User> userList;
+    private static UserManager instance;
 
-    public  UserManager() {
-        userList = new ArrayList<>();
+    private HashMap<String, User> users;
+    private User currUser;
+
+    private  UserManager() {
+        users = new HashMap<>();
+    }
+
+    public static UserManager getInstance() {
+        if (instance == null) {
+            instance = new UserManager();
+        }
+        return instance;
     }
 
     public boolean addUser(String id, String pass) {
-        for(int i = 0; i < userList.size(); i++) {
-            if(userList.get(i).getUsername().equals(id)) {
-                return false;
-            }
+        if (users.get(id) != null) {
+            return false;
         }
-        userList.add(new User(id, pass));
+        User user = new User(id, pass);
+        users.put(id, user);
+        currUser = user;
         return true;
     }
 
     public boolean login(String id, String pass) {
-        for(int i = 0; i < userList.size(); i++) {
-            if(userList.get(i).getUsername().equals(id) && userList.get(i).getPassword().equals(pass)) {
-                return true;
-            }
+        User user = users.get(id);
+        if (user == null) {
+            return false;
         }
-        return false;
+        if (!user.getPassword().equals(pass)) {
+            return false;
+        }
+        currUser = user;
+        return true;
     }
 
 
