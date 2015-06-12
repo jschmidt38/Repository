@@ -17,6 +17,16 @@ public class User {
     public User() {
         System.out.println("Making user");
     }
+
+    /**
+     * this is another constructor
+     * @param username 
+     * @param password
+     */
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
     /**
      * This is for getting username
      * @return username
