@@ -23,9 +23,9 @@ public class User {
      * @param username 
      * @param password
      */
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public User(String id, String pass) {
+        username = id;
+        password = pass;
     }
     /**
      * This is for getting username
