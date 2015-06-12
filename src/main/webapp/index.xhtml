@@ -15,6 +15,7 @@
     <p:inputText value="#{user.username}" />
     <p:password value="#{user.password}" />
     <p:commandButton action="#{user.login}" value="Submit" update="loginForm" />
+    <p:commandButton action="#{user.cancel}" value="Cancel" ajax="false"/>
     <h:outputText value="Wrong login credentials" rendered="#{user.rejected}" />
 </h:form>
 </html>
