@@ -77,5 +77,16 @@ public class User {
         //"Invalid login", "Please try again"));
         return "index";
     }
+
+    /**
+     * Cancels current login attempt
+     * @return the welcome page
+     */
+    public String cancel() {
+        username = null;
+        password = null;
+        rejected = false;
+        return "welcomePage";
+    }
 }
 
