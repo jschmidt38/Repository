@@ -59,4 +59,15 @@ public class UserBean {
         rejected = true;
         return "index";
     }
+
+    /**
+     * Cancels current login attempt
+     * @return the welcome page
+     */
+    public String cancel() {
+        id = null;
+        pass = null;
+        rejected = false;
+        return "welcomePage";
+    }
 }

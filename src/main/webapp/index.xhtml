@@ -12,10 +12,10 @@
     <h:outputLabel value="Please Login"/>
 </h:head>
 <h:form id="loginForm">
-    <p:inputText value="#{user.username}" />
-    <p:password value="#{user.password}" />
-    <p:commandButton action="#{user.login}" value="Submit" update="loginForm" />
-    <p:commandButton action="#{user.cancel}" value="Cancel" ajax="false"/>
-    <h:outputText value="Wrong login credentials" rendered="#{user.rejected}" />
+    <p:inputText value="#{userBean.id}" />
+    <p:password value="#{userBean.pass}" />
+    <p:commandButton action="#{userBean.login}" value="Submit" update="loginForm" />
+    <p:commandButton action="#{userBean.cancel}" value="Cancel" ajax="false"/>
+    <h:outputText value="Wrong login credentials" rendered="#{userBean.rejected}" />
 </h:form>
 </html>

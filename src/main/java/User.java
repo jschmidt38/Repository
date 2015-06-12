@@ -17,6 +17,16 @@ public class User {
     public User() {
         System.out.println("Making user");
     }
+
+    /**
+     * this is another constructor
+     * @param username 
+     * @param password
+     */
+    public User(String id, String pass) {
+        username = id;
+        password = pass;
+    }
     /**
      * This is for getting username
      * @return username
@@ -68,15 +78,6 @@ public class User {
         return "index";
     }
 
-    /**
-     * Cancels current login attempt
-     * @return the welcome page
-     */
-    public String cancel() {
-        username = null;
-        password = null;
-        rejected = false;
-        return "welcomePage";
-    }
+
 }
 
