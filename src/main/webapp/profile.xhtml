@@ -11,7 +11,7 @@
     User Profile
 </h:head>
 <h:form>
-    <h:panelGrid columns="2">
+    <h:panelGrid columns="2" cellpadding="5">
         <p:outputLabel value="First Name: " />
         <p:outputLabel value="#{userManager.user.firstName}" />
 
@@ -21,8 +21,8 @@
         <p:outputLabel value="Email: " />
         <p:outputLabel value="#{userManager.user.email}" />
 
-        <p:button value="Back" href="loggedin.xhtml" />
         <p:commandButton value="Edit" action="editprofile" ajax="false" />
+        <p:button value="Back" href="loggedin.xhtml" />
     </h:panelGrid>
 </h:form>
 </f:view>

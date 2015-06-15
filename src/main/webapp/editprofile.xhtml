@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        Edit Profile Information
+    </h:head>
+    <h:form id="info">
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel value="First Name" />
+            <p:inputText value="#{userManager.user.firstName}" />
+
+            <p:outputLabel value="Last Name" />
+            <p:inputText value="#{userManager.user.lastName}" />
+
+            <p:outputLabel value="Email" />
+            <p:inputText value="#{userManager.user.email}" />
+
+            <p:outputLabel value="Password" />
+            <p:password value="#{userManager.user.password}" />
+
+            <p:commandButton value="Submit"  action="profile" ajax="false" />
+            <p:button value="Cancel" href="profile.xhtml" />
+        </h:panelGrid>
+    </h:form>
+    <h:form>
+        <!--<p:commandButton value="submit" update="info" action="profile" ajax="false"/>-->
+    </h:form>
+</f:view>
+</html>
