@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<!--<h:outputStylesheet library="css" name="welcomePage.css"  />-->
+<f:view>
+    <style type="text/css">
+        body {
+            background-image: url("resources/image/background.jpg");
+            /*background-color: black;*/
+        }
+        .welcome {
+            color:firebrick;
+            position: absolute;
+            left: 500px;
+            top: 130px;
+            font-size: 100px;
+            font-style: italic;
+        }
+        .login {
+            position: absolute;
+            left: 600px;
+            top: 380px;
+        }
+        .register {
+            position: absolute;
+            left: 740px;
+            top: 380px;
+        }
+    </style>
+    <body>
+    <div class = "welcome">
+        <p>WELCOME</p>
+    </div>
+    <div class = "login">
+        <p:button value="Login" icon="ui-icon-star" href="index.xhtml">
+        </p:button>
+    </div>
+    <div class="register">
+        <p:button value="Register" icon="ui-icon-star" href="register.xhtml">
+        </p:button>
+    </div>
+    </body>
+</f:view>
+</html>
