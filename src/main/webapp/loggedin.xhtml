@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title></title>
-</head>
-<body>
-    <p>
-        YOU ARE LOGGED IN
-    </p>
-    <a class="button" href="loggedout.xhtml">You can log out here.</a>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:view>
+    <h:head>
+        <p:outputLabel value="You are logged in" />
+    </h:head>
+    <h:form id="Loggedin">
+        <p:button value="View Profile" href="profile.xhtml" />
+        <p:commandButton value="Logout" action="#{userBean.logout()}" ajax="false" />
+    </h:form>
+</f:view>
 </html>
