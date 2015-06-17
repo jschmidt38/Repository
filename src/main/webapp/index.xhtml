@@ -16,6 +16,6 @@
     <p:password value="#{userBean.pass}" />
     <p:commandButton action="#{userBean.login}" value="Submit" update="loginForm" ajax="false"/>
     <p:commandButton action="#{userBean.cancel}" value="Cancel" ajax="false"/>
-    <h:outputText value="Wrong login credentials" rendered="#{userBean.rejected}" />
+    <h:outputText value="Wrong login credentials" rendered="#{userBean.rejected}" style="color: red" />
 </h:form>
 </html>
