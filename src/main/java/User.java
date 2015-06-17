@@ -1,12 +1,10 @@
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+
 /**
  * This class is used for login page
  * @author Matt Gordon
  * @version 1.0
  */
-@ManagedBean
-@SessionScoped
+
 public class User {
     private String username;
     private String password;
