@@ -1,6 +1,9 @@
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Generated("org.jsonschema2pojo")
 public class Posters {
 
@@ -65,6 +68,10 @@ public class Posters {
      *     The detailed
      */
     public String getDetailed() {
+        String pattern = "http://(.*)dkpu1ddg7pbsk.cloudfront.net(.*)";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(detailed);
+        detailed = detailed.replaceAll(m.group(1), "");
         return detailed;
     }
 

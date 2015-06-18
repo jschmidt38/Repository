@@ -65,7 +65,7 @@ public class RestBean {
 
     public List<Movie> search() {
         String url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=yedukp76ffytfuy24zsqk7f5&q="
-                + keyword + "&page_limit=10";
+                + keyword + "&page_limit=20";
         apicall(url);
         System.out.println(url);
         System.out.println(data);
@@ -78,13 +78,14 @@ public class RestBean {
     }
     public List<Movie> theaters() {
         String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?"
-                + "apikey=yedukp76ffytfuy24zsqk7f5&page_limit=10";
+                + "apikey=yedukp76ffytfuy24zsqk7f5";
         apicall(url);
 
         Gson gson = new Gson();
         MovieResponse response = gson.fromJson(data, MovieResponse.class);
         List<Movie> movies = response.getMovies();
         movieData = movies;
+        System.out.println(url);
         return movieData;
     }
 

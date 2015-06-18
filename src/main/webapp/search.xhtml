@@ -17,6 +17,7 @@
         <p:dataTable id="movietable" var="movies" value="#{restBean.movieData}">
             <p:column headerText="Title">
                 <h:outputText value="#{movies.title}" />
+                <img src="#{movies.posters.detailed}" alt="image" />
             </p:column>
         </p:dataTable>
     </h:form>
