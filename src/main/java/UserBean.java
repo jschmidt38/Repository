@@ -3,7 +3,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 /**
- * Created by thanh on 6/10/15.
+ * This class is the bean for the UserManager
+ * @author Matt, Thanh
+ * @version 1.1
  */
 
 @ManagedBean
@@ -19,6 +21,9 @@ public class UserBean {
     private String email;
     private boolean rejected;
 
+    /**
+     * this is a constructor
+     */
     public UserBean() {
     }
 
@@ -102,10 +107,17 @@ public class UserBean {
         this.email = email;
     }
 
+    /**
+     * This is for getting rejected
+     * @return whether the login is rejected
+     */
     public boolean getRejected() {
         return rejected;
     }
 
+    /**
+     * this is for adding users
+     */
     public String addUser() {
         boolean added = userManager.addUser(id, pass, firstName, lastName, email);
         if(added) {
@@ -115,6 +127,9 @@ public class UserBean {
         }
     }
 
+    /**
+     * This is for logging in
+     */
     public String login() {
         Boolean loggedin = userManager.login(id, pass);
         if(loggedin) {
@@ -139,10 +154,18 @@ public class UserBean {
         return "welcomePage";
     }
 
+    /**
+     * This is for setting userManager
+     * @param userManager
+     */
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
 
+    /**
+     * This is for logout
+     * @return name of the page that will be direct to after logging out
+     */
     public String logout() {
         userManager.logout();
         return "loggedout";
