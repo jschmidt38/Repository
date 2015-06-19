@@ -25,7 +25,7 @@ public class RestBean {
 
     public RestBean() {
         System.out.println("made RestBean");
-        movieData = new ArrayList<>();
+        movieData = new ArrayList<Movie>();
     }
 
     public String getKeyword() {
