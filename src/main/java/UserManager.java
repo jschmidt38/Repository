@@ -13,7 +13,7 @@ public class UserManager {
     private User currUser;
 
     public  UserManager() {
-        users = new HashMap<>();
+        users = new HashMap<String, User>();
     }
 
     public boolean addUser(String id, String pass) {
