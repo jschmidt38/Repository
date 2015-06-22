@@ -18,7 +18,7 @@ public class UserManager {
      * This is a constructor
      */
     public  UserManager() {
-        users = new HashMap<>();
+        users = new HashMap<String, User>();
     }
 
     /**

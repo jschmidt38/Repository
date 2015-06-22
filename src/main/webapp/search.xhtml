@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+    </h:head>
+    <h:form>
+        <p:inputText value="#{restBean.keyword}" >
+            <p:ajax event="blur" listener="#{restBean.search}" update="movietable"/>
+        </p:inputText>
+        <p:commandButton value="In Theaters" action="#{restBean.theaters}" update="movietable" ajax="true"/>
+        <p:dataTable id="movietable" var="movies" value="#{restBean.movieData}">
+            <p:column headerText="Title">
+                <h:outputText value="#{movies.title}" />
+                <img src="#{movies.posters.thumbnail}" alt="image" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</f:view>
+</html>
