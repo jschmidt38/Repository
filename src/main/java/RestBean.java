@@ -89,6 +89,18 @@ public class RestBean {
         return movieData;
     }
 
+    public List<Movie> dVD() {
+        String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?"
+                + "apikey=hgbd53px487tpun3qjn57x5g";
+        apicall(url);
+        Gson gson = new Gson();
+        MovieResponse response = gson.fromJson(data, MovieResponse.class);
+        List<Movie> movies = response.getMovies();
+        movieData = movies;
+        System.out.println(url);
+        return movieData;
+    }
+
     public List<Movie> getMovieData() {
         return movieData;
     }

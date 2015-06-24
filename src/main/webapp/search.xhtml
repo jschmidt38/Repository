@@ -14,7 +14,7 @@
             <p:ajax event="blur" listener="#{restBean.search}" update="movietable"/>
         </p:inputText>
         <p:commandButton value="Search" action="#{restBean.search}" update="movietable" ajax="true"/>
-        
+        <p:commandButton value="New DVDs" action="#{restBean.dVD}" update="movietable" ajax="true"/>
         <p:commandButton value="In Theaters" action="#{restBean.theaters}" update="movietable" ajax="true"/>
         <p:dataTable id="movietable" var="movies" value="#{restBean.movieData}">
             <p:column headerText="Title">
