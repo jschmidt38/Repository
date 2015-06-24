@@ -13,6 +13,10 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String major;
+    private String role;
+    private String status;
+    private String sex;
 
     /**
      * simple constructor for user class
@@ -114,6 +118,70 @@ public class User {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * This is for setting major
+     * @param major major entered
+     */
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    /**
+     * This is for getting major
+     * @return major
+     */
+    public String getMajor() {
+        return major;
+    }
+
+    /**
+     * This is for setting role
+     * @param role role entered
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    /**
+     * This is for getting role
+     * @return role
+     */
+    public String getRole() {
+        return role;
+    }
+
+    /**
+     * This is for setting status
+     * @param status status enterd
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * This is for getting status
+     * @return status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * This is for setting sex
+     * @param sex sex entered
+     */
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    /**
+     * This is for getting sex
+     * @return sex
+     */
+    public String getSex() {
+        return sex;
     }
 }
 
