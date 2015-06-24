@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.HashMap;
 
 /**
  * This class manages users
@@ -15,7 +14,6 @@ import java.util.HashMap;
 @ApplicationScoped
 public class UserManager {
 
-    private HashMap<String, User> users;
     private User currUser;
 
     /**
@@ -114,12 +112,12 @@ public class UserManager {
      * @param pass
      * @return if the user is logged in
      */
-    public boolean login(String id, String pass) {
+    public User login(String id, String pass) {
         currUser = searchUser(id, pass);
         if (currUser == null) {
-            return false;
+            return null;
         }
-        return true;
+        return currUser;
     }
 
     /**
@@ -135,5 +133,32 @@ public class UserManager {
      */
     public void logout() {
         currUser = null;
+    }
+
+    public static void updateUser(User update) {
+        Connection con = Database.makeConnection();
+        try {
+            String query = "UPDATE User SET "
+                    + "password = ?,"
+                    + "firstname = ?,"
+                    + "lastname = ?,"
+                    + "email = ?,"
+                    + "role = ?,"
+                    + "major = ?,"
+                    + "sex = ?"
+                    + " WHERE username = '" + update.getUsername() + "'";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, update.getPassword());
+            preparedStmt.setString(2, update.getFirstName());
+            preparedStmt.setString(3, update.getLastName());
+            preparedStmt.setString(4, update.getEmail());
+            preparedStmt.setString(5, update.getMajor());
+            preparedStmt.setString(6, update.getSex());
+            preparedStmt.execute();
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+          Database.makeClosed(con);
+        }
     }
 }

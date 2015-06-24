@@ -1,6 +1,8 @@
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.servlet.http.HttpSession;
+
 
 /**
  * This class is the bean for the UserManager
@@ -13,13 +15,17 @@ import javax.faces.bean.RequestScoped;
 public class UserBean {
     @ManagedProperty("#{userManager}")
     UserManager userManager;
-
     private String id;
     private String pass;
     private String firstName;
     private String lastName;
     private String email;
+    private String major;
+    private String role;
+    private String status;
+    private String sex;
     private boolean rejected;
+    private User currentUser;
 
     /**
      * this is a constructor
@@ -27,6 +33,13 @@ public class UserBean {
     public UserBean() {
     }
 
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
     /**
      * This is for getting username
      * @return id the username
@@ -41,6 +54,7 @@ public class UserBean {
      */
     public void setId(String id) {
         this.id = id;
+
     }
 
     /**
@@ -131,9 +145,18 @@ public class UserBean {
      * This is for logging in
      */
     public String login() {
-        Boolean loggedin = userManager.login(id, pass);
-        if(loggedin) {
+        User loggedin = userManager.login(id, pass);
+        if(loggedin != null) {
+            HttpSession session = SessionBean.getSession();
+            session.setAttribute("username", currentUser);
             rejected = false;
+            setCurrentUser(loggedin);
+            setFirstName(currentUser.getFirstName());
+            setLastName(currentUser.getLastName());
+            setEmail(currentUser.getEmail());
+            setId(currentUser.getUsername());
+            setPass(currentUser.getPassword());
+            System.out.println(currentUser.getUsername());
             return "loggedin";
         }
 // FacesContext.getCurrentInstance().addMessage(null,
@@ -169,5 +192,13 @@ public class UserBean {
     public String logout() {
         userManager.logout();
         return "loggedout";
+    }
+    public String updateProfile() {
+        currentUser.setPassword(pass);
+        currentUser.setEmail(email);
+        currentUser.setLastName(lastName);
+        currentUser.setFirstName(firstName);
+        UserManager.updateUser(currentUser);
+        return "profile";
     }
 }
