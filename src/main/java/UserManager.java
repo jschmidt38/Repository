@@ -143,22 +143,28 @@ public class UserManager {
                     + "firstname = ?,"
                     + "lastname = ?,"
                     + "email = ?,"
-                    + "role = ?,"
                     + "major = ?,"
                     + "sex = ?"
                     + " WHERE username = '" + update.getUsername() + "'";
             PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1, update.getPassword());
+            if (update.getPassword() != null && update.getPassword().length() >= 6) {
+                preparedStmt.setString(1, update.getPassword());
+            }
             preparedStmt.setString(2, update.getFirstName());
             preparedStmt.setString(3, update.getLastName());
             preparedStmt.setString(4, update.getEmail());
             preparedStmt.setString(5, update.getMajor());
             preparedStmt.setString(6, update.getSex());
+            //preparedStmt.setString(7, update.getRole());
             preparedStmt.execute();
         } catch (Exception e) {
             e.getMessage();
         } finally {
           Database.makeClosed(con);
         }
+    }
+    public String updateProfile() {
+        updateUser(currUser);
+        return "profile";
     }
 }

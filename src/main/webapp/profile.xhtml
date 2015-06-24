@@ -13,13 +13,13 @@
 <h:form>
     <h:panelGrid columns="2" cellpadding="5">
         <p:outputLabel value="First Name: " />
-        <p:outputLabel value="#{userBean.currentUser.firstName}" />
+        <p:outputLabel value="#{userManager.user.firstName}" />
 
         <p:outputLabel value="Last Name: " />
-        <p:outputLabel value="#{userBean.currentUser.lastName}" />
+        <p:outputLabel value="#{userManager.user.lastName}" />
 
         <p:outputLabel value="Email: " />
-        <p:outputLabel value="#{userBean.currentUser.email}" />
+        <p:outputLabel value="#{userManager.user.email}" />
 
         <p:commandButton value="Edit" action="editprofile" ajax="false" />
         <p:button value="Back" href="loggedin.xhtml" />

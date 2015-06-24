@@ -13,18 +13,18 @@
     <h:form id="info">
         <h:panelGrid columns="2" cellpadding="5">
             <p:outputLabel value="First Name" />
-            <p:inputText value="#{userBean.firstName}" />
+            <p:inputText value="#{userManager.user.firstName}" />
 
             <p:outputLabel value="Last Name" />
-            <p:inputText value="#{userBean.lastName}" />
+            <p:inputText value="#{userManager.user.lastName}" />
 
             <p:outputLabel value="Email" />
-            <p:inputText value="#{userBean.email}" />
+            <p:inputText value="#{userManager.user.email}" />
 
             <p:outputLabel value="Password" />
-            <p:password value="#{userBean.pass}" />
+            <p:password value="#{userManager.user.password}" />
 
-            <p:commandButton value="Submit"  action="#{userBean.updateProfile}" ajax="false" />
+            <p:commandButton value="Submit"  action="#{userManager.updateProfile}" ajax="false" />
             <p:button value="Cancel" href="profile.xhtml" />
         </h:panelGrid>
     </h:form>
