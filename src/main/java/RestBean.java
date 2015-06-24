@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +65,7 @@ public class RestBean {
     }
 
     public List<Movie> search() {
+        keyword = URLEncoder.encode(keyword);
         String url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=yedukp76ffytfuy24zsqk7f5&q="
                 + keyword + "&page_limit=20";
         apicall(url);
