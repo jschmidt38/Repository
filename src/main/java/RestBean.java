@@ -91,7 +91,7 @@ public class RestBean {
 
     public List<Movie> dVD() {
         String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?"
-                + "apikey=hgbd53px487tpun3qjn57x5g";
+                + "apikey=yedukp76ffytfuy24zsqk7f5";
         apicall(url);
         Gson gson = new Gson();
         MovieResponse response = gson.fromJson(data, MovieResponse.class);
