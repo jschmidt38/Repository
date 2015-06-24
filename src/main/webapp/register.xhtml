@@ -12,13 +12,15 @@
         <p:outputLabel value="Please enter registration information" />
     </h:head>
     <h:form id="loginForm">
-        Name: <p:inputText value="#{userBean.id}" /> <br></br>
+        Name: <p:inputText value="#{userBean.id}" />
+        <h:outputText value="Username already exist" rendered="#{userBean.rejected}" style="color: red" /> <br></br>
         Pass: <p:password value="#{userBean.pass}" /> <br></br>
         First Name: <p:inputText value="#{userBean.firstName}" /> <br></br>
         Last Name: <p:inputText value="#{userBean.lastName}" /> <br></br>
         Email: <p:inputText value="#{userBean.email}" /> <br></br>
         <p:commandButton action="#{userBean.addUser()}" value="Submit" update="loginForm" ajax="false" />
         <p:button value="Cancel" href="welcomePage.xhtml" />
+
     </h:form>
 </f:view>
 </html>
