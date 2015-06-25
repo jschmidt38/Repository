@@ -1,6 +1,5 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import java.io.BufferedReader;
@@ -76,6 +75,7 @@ public class RestBean {
         movieData = movies;
         return movieData;
     }
+    
     public List<Movie> theaters() {
         String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?"
                 + "apikey=yedukp76ffytfuy24zsqk7f5";
