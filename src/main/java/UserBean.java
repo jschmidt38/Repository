@@ -137,6 +137,7 @@ public class UserBean {
         if(added) {
             return "loggedin";
         } else {
+            rejected = true;
             return "register";
         }
     }
