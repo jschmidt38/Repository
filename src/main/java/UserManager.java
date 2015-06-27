@@ -43,14 +43,16 @@ public class UserManager {
         currUser = newUser;
         Connection con = Database.makeConnection();
         try {
-            String query = "INSERT INTO User(username, password, firstName, lastname, email)"
-                    + "values(?, ?, ?, ?, ?)";
+            String query = "INSERT INTO User(username, password, firstName, lastname, email, major, status)"
+                    + " values(?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, newUser.getUsername());
             preparedStmt.setString(2, newUser.getPassword());
             preparedStmt.setString(3, newUser.getFirstName());
             preparedStmt.setString(4, newUser.getLastName());
             preparedStmt.setString(5, newUser.getEmail());
+            preparedStmt.setString(6, newUser.getMajor());
+            preparedStmt.setString(7, newUser.getStatus());
             preparedStmt.execute();
             return true;
         } catch (Exception exc) {
@@ -93,9 +95,7 @@ public class UserManager {
                     newUser.setFirstName(result.getString("firstname"));
                     newUser.setLastName(result.getString("lastname"));
                     newUser.setMajor(result.getString("major"));
-                    newUser.setRole(result.getString("role"));
                     newUser.setStatus(result.getString("status"));
-                    newUser.setSex(result.getString("sex"));
                     return newUser;
                 }
             }
@@ -144,18 +144,23 @@ public class UserManager {
                     + "lastname = ?,"
                     + "email = ?,"
                     + "major = ?,"
-                    + "sex = ?"
                     + " WHERE username = '" + update.getUsername() + "'";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             if (update.getPassword() != null && update.getPassword().length() >= 6) {
                 preparedStmt.setString(1, update.getPassword());
             }
-            preparedStmt.setString(2, update.getFirstName());
-            preparedStmt.setString(3, update.getLastName());
-            preparedStmt.setString(4, update.getEmail());
-            preparedStmt.setString(5, update.getMajor());
-            preparedStmt.setString(6, update.getSex());
-            //preparedStmt.setString(7, update.getRole());
+            if (update.getFirstName() != null) {
+                preparedStmt.setString(2, update.getFirstName());
+            }
+            if (update.getLastName() != null) {
+                preparedStmt.setString(3, update.getLastName());
+            }
+            if (update.getEmail() != null) {
+                preparedStmt.setString(4, update.getEmail());
+            }
+            if (update.getMajor() != null) {
+                preparedStmt.setString(5, update.getMajor());
+            }
             preparedStmt.execute();
         } catch (Exception e) {
             e.getMessage();

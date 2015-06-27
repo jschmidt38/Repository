@@ -11,9 +11,7 @@ public class User {
     private String lastName;
     private String email;
     private String major;
-    private String role;
     private String status;
-    private String sex;
 
     /**
      * simple constructor for user class
@@ -35,6 +33,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.status = "active";
     }
 
     /**
@@ -134,22 +133,6 @@ public class User {
     }
 
     /**
-     * This is for setting role
-     * @param role role entered
-     */
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    /**
-     * This is for getting role
-     * @return role
-     */
-    public String getRole() {
-        return role;
-    }
-
-    /**
      * This is for setting status
      * @param status status enterd
      */
@@ -165,19 +148,4 @@ public class User {
         return status;
     }
 
-    /**
-     * This is for setting sex
-     * @param sex sex entered
-     */
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    /**
-     * This is for getting sex
-     * @return sex
-     */
-    public String getSex() {
-        return sex;
-    }
 }
