@@ -1,6 +1,4 @@
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.*;
 
 
 /**
@@ -9,7 +7,7 @@ import javax.faces.bean.RequestScoped;
  * @version 1.1
  */
 
-@ManagedBean
+@ManagedBean(name = "userBean")
 @RequestScoped
 public class UserBean {
     @ManagedProperty("#{userManager}")
@@ -20,9 +18,6 @@ public class UserBean {
     private String lastName;
     private String email;
     private String major;
-    private String role;
-    private String status;
-    private String sex;
     private boolean rejected;
     private User currentUser;
 
@@ -32,11 +27,7 @@ public class UserBean {
     public UserBean() {
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
-    }
-
-    public User getCurrentUser() {
+    public User getUser() {
         return currentUser;
     }
     /**
@@ -145,10 +136,9 @@ public class UserBean {
      * This is for logging in
      */
     public String login() {
-        User loggedin = userManager.login(id, pass);
-        if(loggedin != null) {
+        currentUser = userManager.login(id, pass);
+        if(currentUser != null) {
             rejected = false;
-            setCurrentUser(loggedin);
             setFirstName(currentUser.getFirstName());
             setLastName(currentUser.getLastName());
             setEmail(currentUser.getEmail());
@@ -191,12 +181,5 @@ public class UserBean {
         userManager.logout();
         return "loggedout";
     }
-    public String updateProfile() {
-        currentUser.setPassword(pass);
-        currentUser.setEmail(email);
-        currentUser.setLastName(lastName);
-        currentUser.setFirstName(firstName);
-        UserManager.updateUser(currentUser);
-        return "profile";
-    }
+
 }
