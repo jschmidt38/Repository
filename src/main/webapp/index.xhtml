@@ -11,11 +11,35 @@
 <h:head>
     <h:outputLabel value="Please Login"/>
 </h:head>
+<h:form>
+    <h:panelGroup rendered="#{empty userSession.profile}" id="socialButtons" >
+        <h:commandLink id="facebook" action="#{userSession.socialConnect}" >
+            <f:setPropertyActionListener target="#{userSession.providerID}" value="facebook" />
+            <p:button value="Facebook Connect" />
+        </h:commandLink>
+    </h:panelGroup>
+
+    <h:panelGrid columns="3" rendered="#{not empty userSession.profile}" >
+        <h:graphicImage rendered="#{not empty userSession.profile.profileImageURL}" value="#{userSession.profile.profileImageURL}" />
+
+        <h:outputText value="Hello, #{userSession.profile.fullName}" />
+
+        <h:commandButton value="Log out" actionListener="#{userSession.logOut}" />
+    </h:panelGrid>
+</h:form>
+
 <h:form id="loginForm">
     <p:inputText value="#{userBean.id}" />
     <p:password value="#{userBean.pass}" />
     <p:commandButton action="#{userBean.login}" value="Submit" update="loginForm" ajax="false"/>
     <p:commandButton action="#{userBean.cancel}" value="Cancel" ajax="false"/>
     <h:outputText value="Wrong login credentials" rendered="#{userBean.rejected}" style="color: red" />
+    <!--<p:button value="Facebook Connect" href="#{loginPageCode.facebookUrlAuth}" />-->
+    <ui:param name="originalURL" value="#{request.requestURI}?#{request.queryString}" />
+
+    <f:metadata>
+        <f:event rendered="#{empty userSession.profile}" type="preRenderView" listener="#{userSession.setOriginalURL(originalURL)}" />
+    </f:metadata>
 </h:form>
+
 </html>

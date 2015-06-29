@@ -8,11 +8,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by matt on 6/17/15.
+ * This is the bean for using REST Rotten Tomatoes API
+ * @author Matt
+ * @version 1.0
  */
 @ManagedBean
 @ApplicationScoped
@@ -22,19 +25,34 @@ public class RestBean {
     private String keyword;
     private List<Movie> movieData;
 
+    /**
+     * this is a constructor
+     */
     public RestBean() {
         System.out.println("made RestBean");
         movieData = new ArrayList<Movie>();
     }
 
+    /**
+     * this is the getter for keyWord
+     * @return the keyWord
+     */
     public String getKeyword() {
         return keyword;
     }
 
+    /**
+     * this is the setter for keyWord
+     * @param keyword the new keyWord
+     */
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * This method make the api call and create all the needed objects
+     * @param str the URL to the api call
+     */
     public void apicall(String str) {
         URL url = null;
         try {
@@ -62,7 +80,12 @@ public class RestBean {
         }
     }
 
+    /**
+     * This method is for searching movies based on key words
+     * @return A list of movies
+     */
     public List<Movie> search() {
+        keyword = URLEncoder.encode(keyword);
         String url = "http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=yedukp76ffytfuy24zsqk7f5&q="
                 + keyword + "&page_limit=20";
         apicall(url);
@@ -75,7 +98,10 @@ public class RestBean {
         movieData = movies;
         return movieData;
     }
-    
+    /**
+     * this method search for movies which currently are in theaters
+     * @return list of movies in theaters
+     */
     public List<Movie> theaters() {
         String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json?"
                 + "apikey=yedukp76ffytfuy24zsqk7f5";
@@ -89,6 +115,10 @@ public class RestBean {
         return movieData;
     }
 
+    /**
+     * this method search for movies which are newly released in DVDs
+     * @return new movies in DVD
+     */
     public List<Movie> dVD() {
         String url = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/new_releases.json?"
                 + "apikey=yedukp76ffytfuy24zsqk7f5";
@@ -101,10 +131,18 @@ public class RestBean {
         return movieData;
     }
 
+    /**
+     * This method gets the current movie list
+     * @return
+     */
     public List<Movie> getMovieData() {
         return movieData;
     }
 
+    /**
+     * this method gets the number of movies
+     * @return
+     */
     public String getSize() {
         return "size: " + movieData.size();
     }

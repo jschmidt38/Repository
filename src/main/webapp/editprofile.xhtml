@@ -24,7 +24,7 @@
             <p:outputLabel value="Password" />
             <p:password value="#{userManager.user.password}" />
 
-            <p:commandButton value="Submit"  action="profile" ajax="false" />
+            <p:commandButton value="Submit"  action="#{userManager.updateProfile}" ajax="false" />
             <p:button value="Cancel" href="profile.xhtml" />
         </h:panelGrid>
     </h:form>

@@ -1,6 +1,10 @@
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import java.util.HashMap;
+import javax.faces.bean.SessionScoped;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * This class manages users
@@ -9,18 +13,11 @@ import java.util.HashMap;
  */
 @ManagedBean (name = "userManager")
 @ApplicationScoped
+@SessionScoped
 public class UserManager {
 
-    private HashMap<String, User> users;
     private User currUser;
-
-    /**
-     * This is a constructor
-     */
-    public  UserManager() {
-        users = new HashMap<String, User>();
-    }
-
+    private static final long serialVersionUID = -1611162265998907599L;
     /**
      * This is for adding new user
      * @param id username
@@ -41,32 +38,88 @@ public class UserManager {
      * @return if the user was added
      */
     public boolean addUser(String id, String pass, String fistName, String lastName, String email) {
-        if (users.get(id) != null) {
+        if (findUser(id)) {
             return false;
         }
-        User user = new User(id, pass, fistName, lastName, email);
-        users.put(id, user);
-        currUser = user;
-        return true;
+        User newUser = new User(id, pass, fistName, lastName, email);
+        currUser = newUser;
+        Connection con = Database.makeConnection();
+        try {
+            String query = "INSERT INTO User(username, password, firstName, lastname, email, major, status)"
+                    + " values(?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, newUser.getUsername());
+            preparedStmt.setString(2, newUser.getPassword());
+            preparedStmt.setString(3, newUser.getFirstName());
+            preparedStmt.setString(4, newUser.getLastName());
+            preparedStmt.setString(5, newUser.getEmail());
+            preparedStmt.setString(6, newUser.getMajor());
+            preparedStmt.setString(7, newUser.getStatus());
+            preparedStmt.execute();
+            return true;
+        } catch (Exception exc) {
+            System.out.printf("There is something wrong.");
+        } finally {
+            Database.makeClosed(con);
+        }
+        return false;
+    }
+    private boolean findUser(String id) {
+        Connection con = Database.makeConnection();
+        try {
+            Statement state = con.createStatement();
+            ResultSet result = state.executeQuery("SELECT username FROM User");
+            while (result.next()) {
+                if (result.getString("username").equals(id)) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            Database.makeClosed(con);
+        }
+        return false;
     }
 
 
+    private User searchUser(String id, String pass) {
+        Connection con = Database.makeConnection();
+        try {
+            Statement state = con.createStatement();
+            ResultSet result = state.executeQuery("SELECT * FROM User");
+            while (result.next()) {
+                if (result.getString("username").equals(id) && result.getString("password").equals(pass)) {
+                    String ID = result.getString("username");
+                    String passWord = result.getString("password");
+                    User newUser = new User(ID, passWord);
+                    newUser.setEmail(result.getString("email"));
+                    newUser.setFirstName(result.getString("firstname"));
+                    newUser.setLastName(result.getString("lastname"));
+                    newUser.setMajor(result.getString("major"));
+                    newUser.setStatus(result.getString("status"));
+                    return newUser;
+                }
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            Database.makeClosed(con);
+        }
+        return null;
+    }
     /**
      * this is for logging in
      * @param id
      * @param pass
      * @return if the user is logged in
      */
-    public boolean login(String id, String pass) {
-        User user = users.get(id);
-        if (user == null) {
-            return false;
+    public User login(String id, String pass) {
+        currUser = searchUser(id, pass);
+        if (currUser == null) {
+            return null;
         }
-        if (!user.getPassword().equals(pass)) {
-            return false;
-        }
-        currUser = user;
-        return true;
+        return currUser;
     }
 
     /**
@@ -82,5 +135,108 @@ public class UserManager {
      */
     public void logout() {
         currUser = null;
+    }
+
+    public static void updatePassword(User update) {
+        Connection con = Database.makeConnection();
+        try {
+            String query = "UPDATE User SET " + "password = ? " + "WHERE username = '" + update.getUsername() + "'";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, update.getPassword());
+            preparedStmt.execute();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        finally {
+            Database.makeClosed(con);
+        }
+    }
+    public static void updateFirstName(User update) {
+        Connection con = Database.makeConnection();
+        try {
+            String query = "UPDATE User SET " + "firstname = ? " + "WHERE username = '" + update.getUsername() + "'";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, update.getFirstName());
+            preparedStmt.execute();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        finally {
+            Database.makeClosed(con);
+        }
+    }
+    public static void updateLastName(User update) {
+        Connection con = Database.makeConnection();
+        try {
+            String query = "UPDATE User SET " + "lastname = ? " + "WHERE username = '" + update.getUsername() + "'";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, update.getLastName());
+            preparedStmt.execute();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        finally {
+            Database.makeClosed(con);
+        }
+    }
+    public static void updateEmail(User update) {
+        Connection con = Database.makeConnection();
+        try {
+            String query = "UPDATE User SET " + "email = ? " + "WHERE username = '" + update.getUsername() + "'";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, update.getEmail());
+            preparedStmt.execute();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        finally {
+            Database.makeClosed(con);
+        }
+    }
+    public static void updateMajor(User update) {
+        Connection con = Database.makeConnection();
+        try {
+            String query = "UPDATE User SET " + "major = ? " + "WHERE username = '" + update.getUsername() + "'";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, update.getMajor());
+            preparedStmt.execute();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        finally {
+            Database.makeClosed(con);
+        }
+    }
+    public static void updateStatus(User update) {
+        Connection con = Database.makeConnection();
+        try {
+            String query = "UPDATE User SET " + "status = ? " + "WHERE username = '" + update.getUsername() + "'";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString(1, update.getStatus());
+            preparedStmt.execute();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        finally {
+            Database.makeClosed(con);
+        }
+    }
+    public String updateProfile() {
+        if (currUser.getPassword() != null && currUser.getPassword().length() >= 6) {
+            updatePassword(currUser);
+        }
+        if (currUser.getFirstName() != null) {
+            updateFirstName(currUser);
+        }
+        if (currUser.getLastName() != null) {
+            updateLastName(currUser);
+        }
+        if (currUser.getEmail() != null) {
+            updateEmail(currUser);
+        }
+        if (currUser.getMajor() != null) {
+            updateMajor(currUser);
+        }
+        return "profile";
     }
 }

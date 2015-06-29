@@ -4,13 +4,14 @@
  * @author Matt Gordon
  * @version 1.0
  */
-
 public class User {
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private String email;
+    private String major;
+    private String status;
 
     /**
      * simple constructor for user class
@@ -32,6 +33,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.status = "active";
     }
 
     /**
@@ -113,5 +115,37 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-}
 
+    /**
+     * This is for setting major
+     * @param major major entered
+     */
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    /**
+     * This is for getting major
+     * @return major
+     */
+    public String getMajor() {
+        return major;
+    }
+
+    /**
+     * This is for setting status
+     * @param status status enterd
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * This is for getting status
+     * @return status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+}

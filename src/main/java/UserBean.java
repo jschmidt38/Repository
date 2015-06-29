@@ -1,6 +1,5 @@
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.*;
+
 
 /**
  * This class is the bean for the UserManager
@@ -8,18 +7,19 @@ import javax.faces.bean.RequestScoped;
  * @version 1.1
  */
 
-@ManagedBean
+@ManagedBean(name = "userBean")
 @RequestScoped
 public class UserBean {
     @ManagedProperty("#{userManager}")
     UserManager userManager;
-
     private String id;
     private String pass;
     private String firstName;
     private String lastName;
     private String email;
+    private String major;
     private boolean rejected;
+    private User currentUser;
 
     /**
      * this is a constructor
@@ -27,6 +27,9 @@ public class UserBean {
     public UserBean() {
     }
 
+    public User getUser() {
+        return currentUser;
+    }
     /**
      * This is for getting username
      * @return id the username
@@ -41,6 +44,7 @@ public class UserBean {
      */
     public void setId(String id) {
         this.id = id;
+
     }
 
     /**
@@ -132,9 +136,15 @@ public class UserBean {
      * This is for logging in
      */
     public String login() {
-        Boolean loggedin = userManager.login(id, pass);
-        if(loggedin) {
+        currentUser = userManager.login(id, pass);
+        if(currentUser != null) {
             rejected = false;
+            setFirstName(currentUser.getFirstName());
+            setLastName(currentUser.getLastName());
+            setEmail(currentUser.getEmail());
+            setId(currentUser.getUsername());
+            setPass(currentUser.getPassword());
+            System.out.println(currentUser.getUsername());
             return "loggedin";
         }
 // FacesContext.getCurrentInstance().addMessage(null,
@@ -171,4 +181,5 @@ public class UserBean {
         userManager.logout();
         return "loggedout";
     }
+
 }
