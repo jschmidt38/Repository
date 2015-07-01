@@ -119,6 +119,13 @@ public class UserBean {
         return rejected;
     }
 
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getMajor() {
+        return major;
+    }
     /**
      * this is for adding users
      */

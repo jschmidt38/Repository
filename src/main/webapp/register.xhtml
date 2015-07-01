@@ -12,12 +12,27 @@
         <p:outputLabel value="Please enter registration information" />
     </h:head>
     <h:form id="loginForm">
-        Name: <p:inputText value="#{userBean.id}" />
+        <p:outputLabel value="Username: "/>
+        <p:inputText value="#{userBean.id}" />
         <h:outputText value="Username already exist" rendered="#{userBean.rejected}" style="color: red" /> <br></br>
-        Pass: <p:password value="#{userBean.pass}" /> <br></br>
-        First Name: <p:inputText value="#{userBean.firstName}" /> <br></br>
-        Last Name: <p:inputText value="#{userBean.lastName}" /> <br></br>
-        Email: <p:inputText value="#{userBean.email}" /> <br></br>
+
+        <p:outputLabel value="Password: "/>
+        <p:password value="#{userBean.pass}" /> <br></br>
+
+        <p:outputLabel value="First Name: "/>
+        <p:inputText value="#{userBean.firstName}" /> <br></br>
+
+        <p:outputLabel value="Last Name"/>
+        <p:inputText value="#{userBean.lastName}" /> <br></br>
+
+        <p:outputLabel value="Major: "/>d
+        <p:selectOneMenu  value="#{userBean.major}">
+            <f:selectItem itemLabel="Select One" itemValue="" />
+            <f:selectItems value="#{majorBean.majors}" />
+        </p:selectOneMenu> <br></br>
+
+        <p:outputLabel value="Email: "/>
+        <p:inputText value="#{userBean.email}" /> <br></br>
         <p:commandButton action="#{userBean.addUser()}" value="Submit" update="loginForm" ajax="false" />
         <p:button value="Cancel" href="welcomePage.xhtml" />
 
