@@ -1,3 +1,4 @@
+
 /**
  * Created by lingyi on 6/27/15.
  */
@@ -6,6 +7,13 @@ public class MyRating {
     private String movieID;
     private String username;
     private int score;
+
+    public MyRating(int score, String comment, String username, String movieID) {
+        this.score = score;
+        this.comment = comment;
+        this.username = username;
+        this.movieID = movieID;
+    }
 
     public int getScore() {
         return score;

@@ -19,8 +19,10 @@ public class RatingManager {
             preparedStmt.setString(3, username);
             preparedStmt.setString(4, movieID);
             preparedStmt.execute();
+            System.out.println("added entry to RATE");
         } catch (Exception exc) {
             System.out.printf("There is something wrong.");
+            System.out.println(exc.getMessage());
         } finally {
             Database.makeClosed(con);
         }
@@ -55,17 +57,19 @@ public class RatingManager {
             Database.makeClosed(con);
         }
     }
+
     public ArrayList getRating(String movieID) {
-        ArrayList<Integer> rateList = new ArrayList<Integer>();
+        ArrayList<MyRating> rateList = new ArrayList<MyRating>();
         Connection con = Database.makeConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, score FROM Rate WHERE movieID = " + movieID);
+            ResultSet result = state.executeQuery("SELECT movieID, score, comment, username FROM Rate WHERE movieID = " + movieID);
             while (result.next()) {
-                rateList.add(result.getInt("score"));
+                rateList.add(new MyRating(result.getInt("score"), result.getString("comment"),
+                        result.getString("username"), result.getNString("movieID")));
             }
         } catch (Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);

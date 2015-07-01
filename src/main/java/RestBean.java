@@ -1,8 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.faces.bean.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,13 +17,14 @@ import java.util.List;
  * @author Matt
  * @version 1.0
  */
-@ManagedBean
-@ApplicationScoped
+@ManagedBean (name = "restBean")
+@SessionScoped
 public class RestBean {
 
     private String data;
     private String keyword;
     private List<Movie> movieData;
+    private Movie currMovie;
 
     /**
      * this is a constructor
@@ -133,6 +133,11 @@ public class RestBean {
         return movieData;
     }
 
+    public String getMovie(Movie movie) {
+        currMovie = movie;
+        return "movie";
+    }
+
     /**
      * This method gets the current movie list
      * @return
@@ -147,5 +152,13 @@ public class RestBean {
      */
     public String getSize() {
         return "size: " + movieData.size();
+    }
+
+    public Movie getCurrMovie() {
+        return currMovie;
+    }
+
+    void setCurrMovie(Movie currMovie) {
+        this.currMovie = currMovie;
     }
 }
