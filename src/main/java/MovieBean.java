@@ -1,6 +1,7 @@
-import javax.faces.bean.*;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by matt on 7/1/15.
@@ -39,6 +40,11 @@ public class MovieBean {
         this.movie = movie;
     }
 
+    /**
+     * open a movie
+     * @param movie
+     * @return
+     */
     public String openMovie(Movie movie) {
         this.movie = movie;
         return "movie";
@@ -60,11 +66,14 @@ public class MovieBean {
         this.comment = comment;
     }
 
+    /**
+     * rate a movie
+     */
     public void rateMovie() {
         if (movie == null || comment == null || score == -1) {
             return;
         }
-        ratingManager.storeRateAndComment(score, comment, userManager.getUser().getUsername(), movie.getId());
+        ratingManager.storeRateAndComment(score, comment, userManager.getUser().getUsername(), movie.getId(), movie.getTitle());
     }
 
     public ArrayList<MyRating> getRatings() {

@@ -15,16 +15,17 @@ public class RatingManager {
      * @param username username for the current user
      * @param movieID movie's id
      */
-    public void storeRateAndComment(int rate, String comment, String username, String movieID) {
+    public void storeRateAndComment(int rate, String comment, String username, String movieID, String movieTitle) {
         Connection con = Database.makeConnection();
         try {
-            String query = "INSERT INTO comment(score, comment, username, movieID)"
-                    + " values(?, ?, ?, ?)";
+            String query = "INSERT INTO comment(score, comment, username, movieID, movie)"
+                    + " values(?, ?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, rate);
             preparedStmt.setString(2, comment);
             preparedStmt.setString(3, username);
             preparedStmt.setString(4, movieID);
+            preparedStmt.setString(5, movieTitle);
             preparedStmt.execute();
             System.out.println("added entry to RATE");
         } catch (Exception exc) {
@@ -40,15 +41,17 @@ public class RatingManager {
      * @param comment
      * @param username
      * @param movieID
+     * @param movieTitle
      */
-    public void storeComment(String comment, String username, String movieID) {
+    public void storeComment(String comment, String username, String movieID, String movieTitle ) {
         Connection con = Database.makeConnection();
         try {
-            String query = "INSERT INTO comment(comment, username, movieID)" + "values(?, ?, ?)";
+            String query = "INSERT INTO comment(comment, username, movieID, movie)" + "values(?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, comment);
             preparedStmt.setString(2, username);
             preparedStmt.setString(3, movieID);
+            preparedStmt.setString(4, movieTitle);
             preparedStmt.execute();
         } catch (Exception e) {
             e.getMessage();
@@ -63,14 +66,15 @@ public class RatingManager {
      * @param movieID
      * @param username
      */
-    public void  storeRate(int score, String movieID, String username) {
+    public void  storeRate(int score, String movieID, String username, String movieTitle) {
         Connection con = Database.makeConnection();
         try {
-            String query = "INSERT INTO comment(comment, username, movieID)" + "values(?, ?, ?)";
+            String query = "INSERT INTO comment(comment, username, movieID, movie)" + "values(?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, score);
             preparedStmt.setString(2, username);
             preparedStmt.setString(3, movieID);
+            preparedStmt.setString(4, movieTitle);
             preparedStmt.execute();
         } catch (Exception e) {
             e.getMessage();
@@ -161,7 +165,7 @@ public class RatingManager {
      * @return list of movie title;
      */
     public ArrayList getRecommendation(String major) {
-        ArrayList<String> reco = new ArrayList<>();
+        ArrayList<String> reco = new ArrayList<String>();
         Connection con = Database.makeConnection();
         try {
             Statement state = con.createStatement();
