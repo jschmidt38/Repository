@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by lingyi on 6/26/15.
  */
 public class RatingManager {
-    /*
+    /**
      * for storing the rate and comment
      * @param rate score
      * @param comment user's comment
@@ -34,6 +34,13 @@ public class RatingManager {
             Database.makeClosed(con);
         }
     }
+
+    /**
+     * for storing comment
+     * @param comment
+     * @param username
+     * @param movieID
+     */
     public void storeComment(String comment, String username, String movieID) {
         Connection con = Database.makeConnection();
         try {
@@ -49,6 +56,13 @@ public class RatingManager {
             Database.makeClosed(con);
         }
     }
+
+    /**
+     * for storing rate score into database
+     * @param score
+     * @param movieID
+     * @param username
+     */
     public void  storeRate(int score, String movieID, String username) {
         Connection con = Database.makeConnection();
         try {
@@ -65,6 +79,11 @@ public class RatingManager {
         }
     }
 
+    /**
+     * get the rating score from database
+     * @param movieID
+     * @return a list of score
+     */
     public ArrayList getRating(String movieID) {
         ArrayList<MyRating> rateList = new ArrayList<MyRating>();
         Connection con = Database.makeConnection();
@@ -83,6 +102,11 @@ public class RatingManager {
         }
         return rateList;
     }
+    /**
+     * get avergae score of the movie
+     * @param movieID
+     * @return the average score
+     */
     public int getAverageRate(String movieID) {
         ArrayList<Integer> rateList = getRating(movieID);
         int total = 0;
@@ -91,6 +115,11 @@ public class RatingManager {
         }
         return total/rateList.size();
     }
+    /**
+     * get comments from the database
+     * @param movieID
+     * @return the list of comments
+     */
     public ArrayList getComment(String movieID) {
         ArrayList<String> commentList = new ArrayList<String>();
         Connection con = Database.makeConnection();
@@ -126,7 +155,7 @@ public class RatingManager {
 //        }
 //        return reco;
 //    }
-    /*
+    /**
      * get recommendation of movie title based on major
      * @param major user's major
      * @return list of movie title;
