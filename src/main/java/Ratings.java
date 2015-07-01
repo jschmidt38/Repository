@@ -1,6 +1,7 @@
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Ratings {
@@ -105,6 +106,11 @@ public class Ratings {
         this.audienceScore = audienceScore;
     }
 
+    /**
+     * with audience score
+     * @param audienceScore
+     * @return
+     */
     public Ratings withAudienceScore(Integer audienceScore) {
         this.audienceScore = audienceScore;
         return this;

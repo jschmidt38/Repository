@@ -17,7 +17,7 @@ import java.sql.Statement;
 public class UserManager {
 
     private User currUser;
-    private static final long serialVersionUID = -1611162265998907599L;
+    //private static final long serialVersionUID = -1611162265998907599L;
     /**
      * This is for adding new user
      * @param id username
@@ -81,8 +81,6 @@ public class UserManager {
         }
         return false;
     }
-
-
     private User searchUser(String id, String pass) {
         Connection con = Database.makeConnection();
         try {
@@ -137,6 +135,10 @@ public class UserManager {
         currUser = null;
     }
 
+    /**
+     * update the password to database
+     * @param update
+     */
     public static void updatePassword(User update) {
         Connection con = Database.makeConnection();
         try {
@@ -151,6 +153,11 @@ public class UserManager {
             Database.makeClosed(con);
         }
     }
+
+    /**
+     * update the firstname to database
+     * @param update
+     */
     public static void updateFirstName(User update) {
         Connection con = Database.makeConnection();
         try {
@@ -165,6 +172,11 @@ public class UserManager {
             Database.makeClosed(con);
         }
     }
+
+    /**
+     * update lastname into database
+     * @param update
+     */
     public static void updateLastName(User update) {
         Connection con = Database.makeConnection();
         try {
@@ -179,6 +191,11 @@ public class UserManager {
             Database.makeClosed(con);
         }
     }
+
+    /**
+     * update email to database
+     * @param update
+     */
     public static void updateEmail(User update) {
         Connection con = Database.makeConnection();
         try {
@@ -193,6 +210,11 @@ public class UserManager {
             Database.makeClosed(con);
         }
     }
+
+    /**
+     * update major into databse
+     * @param update
+     */
     public static void updateMajor(User update) {
         Connection con = Database.makeConnection();
         try {
@@ -207,6 +229,11 @@ public class UserManager {
             Database.makeClosed(con);
         }
     }
+
+    /**
+     * update status into database
+     * @param update
+     */
     public static void updateStatus(User update) {
         Connection con = Database.makeConnection();
         try {
@@ -221,6 +248,11 @@ public class UserManager {
             Database.makeClosed(con);
         }
     }
+
+    /**
+     * update the user's profile into database
+     * @return profile
+     */
     public String updateProfile() {
         if (currUser.getPassword() != null && currUser.getPassword().length() >= 6) {
             updatePassword(currUser);

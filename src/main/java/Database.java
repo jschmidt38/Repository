@@ -6,6 +6,10 @@ import java.sql.SQLException;
  * Created by lingyi on 6/19/15.
  */
 public class Database {
+    /**
+     * make connection with databse
+     * @return connection
+     */
     public static Connection makeConnection() {
         Connection con = null;
         try {
@@ -21,6 +25,10 @@ public class Database {
         return null;
     }
 
+    /**
+     * close the database
+     * @param con
+     */
     public static void makeClosed(Connection con) {
         try {
             con.close();

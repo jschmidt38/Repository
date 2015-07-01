@@ -1,5 +1,6 @@
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class ReleaseDates {
@@ -50,6 +51,11 @@ public class ReleaseDates {
         this.dvd = dvd;
     }
 
+    /**
+     *
+     * @param dvd
+     * @return
+     */
     public ReleaseDates withDvd(String dvd) {
         this.dvd = dvd;
         return this;

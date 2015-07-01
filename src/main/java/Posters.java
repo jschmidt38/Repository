@@ -1,6 +1,6 @@
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 
+import javax.annotation.Generated;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,6 +34,11 @@ public class Posters {
         this.thumbnail = thumbnail;
     }
 
+    /**
+     * with thumbnail
+     * @param thumbnail
+     * @return
+     */
     public Posters withThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
         return this;
@@ -57,6 +62,11 @@ public class Posters {
         this.profile = profile;
     }
 
+    /**
+     * with profile
+     * @param profile
+     * @return
+     */
     public Posters withProfile(String profile) {
         this.profile = profile;
         return this;

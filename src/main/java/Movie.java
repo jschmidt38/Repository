@@ -1,8 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import javax.annotation.Generated;
+import java.util.ArrayList;
+import java.util.List;
 
 @Generated("org.jsonschema2pojo")
 public class Movie {
@@ -57,6 +58,11 @@ public class Movie {
         this.id = id;
     }
 
+    /**
+     * with id
+     * @param id
+     * @return
+     */
     public Movie withId(String id) {
         this.id = id;
         return this;
@@ -80,6 +86,11 @@ public class Movie {
         this.title = title;
     }
 
+    /**
+     * with title
+     * @param title
+     * @return
+     */
     public Movie withTitle(String title) {
         this.title = title;
         return this;
@@ -126,6 +137,11 @@ public class Movie {
         this.mpaaRating = mpaaRating;
     }
 
+    /**
+     * with mpaaRating
+     * @param mpaaRating
+     * @return
+     */
     public Movie withMpaaRating(String mpaaRating) {
         this.mpaaRating = mpaaRating;
         return this;
@@ -149,6 +165,11 @@ public class Movie {
         this.runtime = runtime;
     }
 
+    /**
+     * with runtime
+     * @param runtime
+     * @return
+     */
     public Movie withRuntime(String runtime) {
         this.runtime = runtime;
         return this;
@@ -172,6 +193,11 @@ public class Movie {
         this.criticsConsensus = criticsConsensus;
     }
 
+    /**
+     * with critics consensus
+     * @param criticsConsensus
+     * @return
+     */
     public Movie withCriticsConsensus(String criticsConsensus) {
         this.criticsConsensus = criticsConsensus;
         return this;
@@ -195,6 +221,11 @@ public class Movie {
         this.releaseDates = releaseDates;
     }
 
+    /**
+     * with release date
+     * @param releaseDates
+     * @return
+     */
     public Movie withReleaseDates(ReleaseDates releaseDates) {
         this.releaseDates = releaseDates;
         return this;
@@ -218,6 +249,11 @@ public class Movie {
         this.ratings = ratings;
     }
 
+    /**
+     * with rating
+     * @param ratings
+     * @return
+     */
     public Movie withRatings(Ratings ratings) {
         this.ratings = ratings;
         return this;
@@ -241,6 +277,11 @@ public class Movie {
         this.synopsis = synopsis;
     }
 
+    /**
+     * with synopsis
+     * @param synopsis
+     * @return
+     */
     public Movie withSynopsis(String synopsis) {
         this.synopsis = synopsis;
         return this;
@@ -264,6 +305,11 @@ public class Movie {
         this.posters = posters;
     }
 
+    /**
+     * with posters
+     * @param posters
+     * @return
+     */
     public Movie withPosters(Posters posters) {
         this.posters = posters;
         return this;
@@ -287,6 +333,11 @@ public class Movie {
         this.abridgedCast = abridgedCast;
     }
 
+    /**
+     * with abridged cast
+     * @param abridgedCast
+     * @return
+     */
     public Movie withAbridgedCast(List<AbridgedCast> abridgedCast) {
         this.abridgedCast = abridgedCast;
         return this;
@@ -310,6 +361,11 @@ public class Movie {
         this.alternateIds = alternateIds;
     }
 
+    /**
+     * with alternated ID
+     * @param alternateIds
+     * @return
+     */
     public Movie withAlternateIds(AlternateIds alternateIds) {
         this.alternateIds = alternateIds;
         return this;
@@ -333,6 +389,11 @@ public class Movie {
         this.links = links;
     }
 
+    /**
+     * with links
+     * @param links
+     * @return
+     */
     public Movie withLinks(Links links) {
         this.links = links;
         return this;

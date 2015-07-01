@@ -1,7 +1,8 @@
+import com.google.gson.annotations.Expose;
+
+import javax.annotation.Generated;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Generated;
-import com.google.gson.annotations.Expose;
 
 @Generated("org.jsonschema2pojo")
 public class AbridgedCast {
@@ -31,6 +32,11 @@ public class AbridgedCast {
         this.name = name;
     }
 
+    /**
+     * with name
+     * @param name
+     * @return
+     */
     public AbridgedCast withName(String name) {
         this.name = name;
         return this;
@@ -54,6 +60,11 @@ public class AbridgedCast {
         this.id = id;
     }
 
+    /**
+     * with id
+     * @param id
+     * @return
+     */
     public AbridgedCast withId(String id) {
         this.id = id;
         return this;
@@ -77,6 +88,11 @@ public class AbridgedCast {
         this.characters = characters;
     }
 
+    /**
+     * with characters
+     * @param characters
+     * @return
+     */
     public AbridgedCast withCharacters(List<String> characters) {
         this.characters = characters;
         return this;

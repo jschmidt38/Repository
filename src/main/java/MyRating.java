@@ -15,41 +15,67 @@ public class MyRating {
         this.movieID = movieID;
     }
 
+    /**
+     * getting score
+     * @return score
+     */
     public int getScore() {
         return score;
     }
-
+    /**
+     * setting score
+     * @param score
+     */
     public void setScore(int score) {
         this.score = score;
     }
 
+    /**
+     * getting comment
+     * @return comment
+     */
     public String getComment() {
         return comment;
     }
 
+    /**
+     * setting comment
+     * @param comment
+     */
     public void setComment(String comment) {
         this.comment = comment;
     }
 
+    /**
+     * getting movie ID
+     * @return movie ID
+     */
     public String getMovieID() {
         return movieID;
     }
 
+    /**
+     * setting movie ID
+     * @param movieID
+     */
     public void setMovieID(String movieID) {
         this.movieID = movieID;
     }
 
+    /**
+     * getting username
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * setting user
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
-
-    public void updateToDatabase() {
-
-    }
-
 
 }
