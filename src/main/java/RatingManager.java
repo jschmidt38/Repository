@@ -11,7 +11,7 @@ public class RatingManager {
     public void storeRateAndComment(int rate, String comment, String username, String movieID) {
         Connection con = Database.makeConnection();
         try {
-            String query = "INSERT INTO Rate(score, comment, username, movieID)"
+            String query = "INSERT INTO comment(score, comment, username, movieID)"
                     + " values(?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, rate);
@@ -28,7 +28,7 @@ public class RatingManager {
     public void storeComment(String comment, String username, String movieID) {
         Connection con = Database.makeConnection();
         try {
-            String query = "INSERT INTO Rate(comment, username, movieID)" + "values(?, ?, ?)";
+            String query = "INSERT INTO comment(comment, username, movieID)" + "values(?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, comment);
             preparedStmt.setString(2, username);
@@ -43,7 +43,7 @@ public class RatingManager {
     public void  storeRate(int score, String movieID, String username) {
         Connection con = Database.makeConnection();
         try {
-            String query = "INSERT INTO Rate(comment, username, movieID)" + "values(?, ?, ?)";
+            String query = "INSERT INTO comment(comment, username, movieID)" + "values(?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, score);
             preparedStmt.setString(2, username);
@@ -60,7 +60,7 @@ public class RatingManager {
         Connection con = Database.makeConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, score FROM Rate WHERE movieID = " + movieID);
+            ResultSet result = state.executeQuery("SELECT movieID, score FROM comment WHERE movieID = " + movieID);
             while (result.next()) {
                 rateList.add(result.getInt("score"));
             }
@@ -85,7 +85,7 @@ public class RatingManager {
         Connection con = Database.makeConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, comment FROM Rate WHERE movieID = " + movieID);
+            ResultSet result = state.executeQuery("SELECT movieID, comment FROM comment WHERE movieID = " + movieID);
             while (result.next()) {
                 commentList.add(result.getString("comment"));
             }
@@ -96,5 +96,22 @@ public class RatingManager {
             Database.makeClosed(con);
         }
         return commentList;
+    }
+    public ArrayList getRecommendation(String major) {
+        ArrayList<String> reco = new ArrayList<>();
+        Connection con = Database.makeConnection();
+        try {
+            Statement state = con.createStatement();
+            ResultSet result = state.executeQuery("SELECT movieID, major FROM comment WHERE major = " + major);
+            while (result.next()) {
+                reco.add(result.getString("movieID"));
+            }
+        } catch (Exception e){
+            e.getMessage();
+        }
+        finally {
+            Database.makeClosed(con);
+        }
+        return reco;
     }
 }
