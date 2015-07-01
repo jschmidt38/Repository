@@ -6,6 +6,9 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean
 @ApplicationScoped
+/**
+ *
+ */
 public class MajorBean {
 
     public Major[] getMajors() {
