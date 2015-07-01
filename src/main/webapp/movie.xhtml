@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <p:outputLabel value="#{movieBean.movie.title}" style="font-size: 20pt"/>
+        <p:outputLabel value="#{movieBean.movie.id}" />
+    </h:head>
+
+    <h:form id="table">
+        <p:dataTable id="ratingtable" var="ratings" value="#{movieBean.ratings}">
+            <p:column headerText="User">
+                <p:outputLabel value="#{ratings.username}" />
+            </p:column>
+            <p:column headerText="Score">
+                <p:outputLabel value="#{ratings.score}" />
+            </p:column>
+            <p:column headerText="Comment">
+                <p:outputLabel value="#{ratings.comment}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5" >
+            <p:outputLabel value="Score" />
+            <p:rating value="#{movieBean.score}" stars="10"/>
+
+            <p:outputLabel value="Comment" />
+            <p:inputTextarea rows="10" cols="50" value="#{movieBean.comment}" />
+
+            <p:commandButton value="Submit" action="#{movieBean.rateMovie}" update="table"/>
+        </h:panelGrid>
+    </h:form>
+
+</f:view>
+</html>

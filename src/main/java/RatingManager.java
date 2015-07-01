@@ -8,6 +8,13 @@ import java.util.ArrayList;
  * Created by lingyi on 6/26/15.
  */
 public class RatingManager {
+    /*
+     * for storing the rate and comment
+     * @param rate score
+     * @param comment user's comment
+     * @param username username for the current user
+     * @param movieID movie's id
+     */
     public void storeRateAndComment(int rate, String comment, String username, String movieID) {
         Connection con = Database.makeConnection();
         try {
@@ -19,8 +26,10 @@ public class RatingManager {
             preparedStmt.setString(3, username);
             preparedStmt.setString(4, movieID);
             preparedStmt.execute();
+            System.out.println("added entry to RATE");
         } catch (Exception exc) {
             System.out.printf("There is something wrong.");
+            System.out.println(exc.getMessage());
         } finally {
             Database.makeClosed(con);
         }
@@ -55,17 +64,19 @@ public class RatingManager {
             Database.makeClosed(con);
         }
     }
+
     public ArrayList getRating(String movieID) {
-        ArrayList<Integer> rateList = new ArrayList<Integer>();
+        ArrayList<MyRating> rateList = new ArrayList<MyRating>();
         Connection con = Database.makeConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, score FROM comment WHERE movieID = " + movieID);
+            ResultSet result = state.executeQuery("SELECT movieID, score, comment, username FROM comment WHERE movieID = " + movieID);
             while (result.next()) {
-                rateList.add(result.getInt("score"));
+                rateList.add(new MyRating(result.getInt("score"), result.getString("comment"),
+                        result.getString("username"), result.getNString("movieID")));
             }
         } catch (Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);
@@ -97,14 +108,37 @@ public class RatingManager {
         }
         return commentList;
     }
+    //For API call
+//    public ArrayList getRecommendation(String major) {
+//        ArrayList<String> reco = new ArrayList<>();
+//        Connection con = Database.makeConnection();
+//        try {
+//            Statement state = con.createStatement();
+//            ResultSet result = state.executeQuery("SELECT movieID, major FROM comment WHERE major = " + major);
+//            while (result.next()) {
+//                reco.add(result.getString("movieID"));
+//            }
+//        } catch (Exception e){
+//            e.getMessage();
+//        }
+//        finally {
+//            Database.makeClosed(con);
+//        }
+//        return reco;
+//    }
+    /*
+     * get recommendation of movie title based on major
+     * @param major user's major
+     * @return list of movie title;
+     */
     public ArrayList getRecommendation(String major) {
         ArrayList<String> reco = new ArrayList<>();
         Connection con = Database.makeConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, major FROM comment WHERE major = " + major);
+            ResultSet result = state.executeQuery("SELECT movie, major FROM comment WHERE major = " + major);
             while (result.next()) {
-                reco.add(result.getString("movieID"));
+                reco.add(result.getString("movie"));
             }
         } catch (Exception e){
             e.getMessage();

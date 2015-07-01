@@ -21,6 +21,12 @@
             <p:outputLabel value="Email" />
             <p:inputText value="#{userManager.user.email}" />
 
+            <p:outputLabel value="Major" />
+            <p:selectOneMenu  value="#{userManager.user.major}">
+                <f:selectItem itemLabel="Select One" itemValue="" />
+                <f:selectItems value="#{majorBean.majors}" />
+            </p:selectOneMenu>
+
             <p:outputLabel value="Password" />
             <p:password value="#{userManager.user.password}" />
 
