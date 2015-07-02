@@ -73,10 +73,18 @@ public class MovieBean {
         if (movie == null || comment == null || score == -1) {
             return;
         }
-        ratingManager.storeRateAndComment(score, comment, userManager.getUser().getUsername(), movie.getId(), movie.getTitle());
+        ratingManager.storeRateAndComment(score, comment, userManager.getUser().getUsername(), movie.getId(), movie.getTitle(), userManager.getUser().getMajor());
     }
 
     public ArrayList<MyRating> getRatings() {
         return ratingManager.getRating(movie.getId());
+    }
+    public ArrayList<Movie> getRecommendations() {
+        ArrayList<Movie> toReturn = new ArrayList<Movie>();
+       ArrayList<String> list = ratingManager.getRecommendation(userManager.getUser().getMajor());
+        for (int i = 0; i < list.size(); i++) {
+            toReturn.add(restBean.getMovieByID(list.get(i)));
+        }
+        return toReturn;
     }
 }

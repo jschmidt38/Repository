@@ -99,6 +99,23 @@ public class RestBean {
         movieData = movies;
         return movieData;
     }
+    public Movie getMovieByID(String id) {
+        Movie movie = null;
+        try {
+            String url = "http://api.rottentomatoes.com/api/public/v1.0/movies/"+id
+                    +".json?apikey=yedukp76ffytfuy24zsqk7f5";
+            URL newUrl = new URL(url);
+            InputStreamReader isr = new InputStreamReader(newUrl.openStream());
+            BufferedReader br = new BufferedReader(isr);
+            Gson gson = new Gson();
+            movie = gson.fromJson(br, Movie.class);
+        } catch (MalformedURLException m) {
+            m.getMessage();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+        return movie;
+    }
 
     /**
      * this method search for movies which currently are in theaters
