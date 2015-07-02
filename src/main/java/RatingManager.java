@@ -3,6 +3,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 /**
  * Created by lingyi on 6/26/15.
@@ -102,7 +104,7 @@ public class RatingManager {
                 if (major == null) {
                     major = "";
                 }
-                rateList.add(new MyRating(result.getInt("score"), result.getString("comment"),
+                rateList.add(new MyRating((float)result.getInt("score"), result.getString("comment"),
                         result.getString("username"), major, result.getNString("movieID"),
                         result.getString("movie")));
             }
@@ -151,13 +153,19 @@ public class RatingManager {
     }
     //For API call
     public ArrayList getRecommendation(String major) {
-        ArrayList<String> reco = new ArrayList<String>();
+        HashMap<String, MyRating> map = new HashMap<String, MyRating>();
         Connection con = Database.makeConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, major FROM comment WHERE major = \"" + major + "\"");
+            ResultSet result = state.executeQuery("SELECT movieID, major, score FROM comment WHERE major = \"" + major + "\"");
             while (result.next()) {
-                reco.add(result.getString("movieID"));
+                String movieID = result.getString("movieID");
+                int score = result.getInt("score");
+                if (map.containsKey(movieID)) {
+                    map.get(movieID).addRate(score);
+                } else {
+                    map.put(movieID, new MyRating(score, movieID));
+                }
             }
         } catch (Exception e){
             e.getMessage();
@@ -165,7 +173,9 @@ public class RatingManager {
         finally {
             Database.makeClosed(con);
         }
-        return reco;
+        ArrayList<MyRating> list = new ArrayList<MyRating>(map.values());
+        Collections.sort(list, Collections.reverseOrder());
+        return list;
     }
     /**
      * get recommendation of movie title based on major

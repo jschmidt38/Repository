@@ -81,9 +81,9 @@ public class MovieBean {
     }
     public ArrayList<Movie> getRecommendations() {
         ArrayList<Movie> toReturn = new ArrayList<Movie>();
-       ArrayList<String> list = ratingManager.getRecommendation(userManager.getUser().getMajor());
-        for (int i = 0; i < list.size(); i++) {
-            toReturn.add(restBean.getMovieByID(list.get(i)));
+        ArrayList<MyRating> list = ratingManager.getRecommendation(userManager.getUser().getMajor());
+        for (MyRating e : list) {
+            toReturn.add(restBean.getMovieByID(e.getMovieID()));
         }
         return toReturn;
     }

@@ -8,8 +8,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
     <h:head>
+        <img src="#{movieBean.movie.posters.thumbnail}" alt="image" />
         <p:outputLabel value="#{movieBean.movie.title}" style="font-size: 20pt"/>
-        <p:outputLabel value="#{movieBean.movie.id}" />
     </h:head>
 
     <h:form id="table">

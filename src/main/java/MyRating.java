@@ -2,28 +2,35 @@
 /**
  * Created by lingyi on 6/27/15.
  */
-public class MyRating {
+public class MyRating implements Comparable<MyRating> {
     private String comment;
     private String movieID;
     private String username;
     private String movieName;
     private String major;
-    private int score;
+    private float score;
+    private float totalScore;
+    private int numRates;
 
-    public MyRating(int score, String comment, String username, String major, String movieID, String movieName) {
+    public MyRating(float score, String movieID) {
+        this(score, "", "", "", movieID, "");
+    }
+    public MyRating(float score, String comment, String username, String major, String movieID, String movieName) {
         this.score = score;
         this.comment = comment;
         this.username = username;
         this.major = major;
         this.movieID = movieID;
         this.movieName = movieName;
+        totalScore = score;
+        numRates = 1;
     }
 
     /**
      * getting score
      * @return score
      */
-    public int getScore() {
+    public float getScore() {
         return score;
     }
     /**
@@ -112,5 +119,34 @@ public class MyRating {
      */
     public void setMajor(String major) {
         this.major = major;
+    }
+
+    public int getNumRates() {
+        return numRates;
+    }
+
+    /**
+     * Override compareTo method for MyRating
+     * @param r the rating to be compared to
+     */
+    @Override
+    public int compareTo(MyRating r) {
+        if (r.getScore() < score) {
+            return 1;
+        }
+        if (score < r.getScore()) {
+            return -1;
+        }
+        return 0;
+    }
+
+    /**
+     * Method to add rate by averaging scores
+     * @param score the new score to add
+     */
+    public void addRate(int score) {
+        totalScore = totalScore + score;
+        numRates++;
+        this.score = totalScore / numRates;
     }
 }
