@@ -96,10 +96,15 @@ public class RatingManager {
         Connection con = Database.makeConnection();
         try {
             Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, score, comment, username FROM comment WHERE movieID = " + movieID);
+            ResultSet result = state.executeQuery("SELECT movieID, movie, score, comment, username, major FROM comment WHERE movieID = " + movieID);
             while (result.next()) {
+                String major = result.getString("major");
+                if (major == null) {
+                    major = "";
+                }
                 rateList.add(new MyRating(result.getInt("score"), result.getString("comment"),
-                        result.getString("username"), result.getNString("movieID")));
+                        result.getString("username"), major, result.getNString("movieID"),
+                        result.getString("movie")));
             }
         } catch (Exception e){
             System.out.println(e.getMessage());

@@ -6,13 +6,17 @@ public class MyRating {
     private String comment;
     private String movieID;
     private String username;
+    private String movieName;
+    private String major;
     private int score;
 
-    public MyRating(int score, String comment, String username, String movieID) {
+    public MyRating(int score, String comment, String username, String major, String movieID, String movieName) {
         this.score = score;
         this.comment = comment;
         this.username = username;
+        this.major = major;
         this.movieID = movieID;
+        this.movieName = movieName;
     }
 
     /**
@@ -78,4 +82,35 @@ public class MyRating {
         this.username = username;
     }
 
+    /**
+     * getting movieName
+     * @return
+     */
+    public String getMovieName() {
+        return movieName;
+    }
+
+    /**
+     * setting movieName
+     * @param movieName
+     */
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+    /**
+     * getting major
+     * @return
+     */
+    public String getmajor() {
+        return major;
+    }
+
+    /**
+     * setting major
+     * @param major
+     */
+    public void setMajor(String major) {
+        this.major = major;
+    }
 }
