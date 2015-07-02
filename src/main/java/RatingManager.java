@@ -152,6 +152,11 @@ public class RatingManager {
         return commentList;
     }
     //For API call
+    /**
+     * get recommendation of movie title based on major
+     * @param major user's major
+     * @return list the list of ratings sorted by highest average score
+     */
     public ArrayList getRecommendation(String major) {
         HashMap<String, MyRating> map = new HashMap<String, MyRating>();
         Connection con = Database.makeConnection();
