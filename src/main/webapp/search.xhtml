@@ -17,10 +17,14 @@
         <p:button value="Back" href="loggedin.xhtml" />
 
         <p:dataTable id="movietable" var="movies" value="#{restBean.movieData}">
-            <p:column headerText="Title">
-                <img src="#{movies.posters.thumbnail}" alt="image" />
-                <h:outputText value="#{movies.title}" />
+            <p:column headerText="Go To Movie Page">
                 <p:commandButton value="Rate" action="#{restBean.getMovie(movies)}" ajax="false" />
+            </p:column>
+            <p:column headerText="Logo">
+                <img src="#{movies.posters.thumbnail}" alt="image" />
+            <p:column headerText="Title">
+                <h:outputText value="#{movies.title}" />
+            </p:column>
             </p:column>
         </p:dataTable>
     </h:form>

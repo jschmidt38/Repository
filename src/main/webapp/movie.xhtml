@@ -11,7 +11,9 @@
         <img src="#{movieBean.movie.posters.thumbnail}" alt="image" />
         <p:outputLabel value="#{movieBean.movie.title}" style="font-size: 20pt"/>
     </h:head>
-
+    <p:button value="Main Page" href="loggedin.xhtml" />
+    <p:button value="Search" href="search.xhtml" />
+    <p:button value="Profile" href="profile.xhtml" />
     <h:form id="table">
         <p:dataTable id="ratingtable" var="ratings" value="#{movieBean.ratings}">
             <p:column headerText="User">
@@ -39,6 +41,7 @@
             <p:commandButton value="Submit" action="#{movieBean.rateMovie}" update="table"/>
         </h:panelGrid>
     </h:form>
+
 
 </f:view>
 </html>
