@@ -20,6 +20,7 @@ public class UserBean {
     private String major;
     private boolean rejected;
     private User currentUser;
+    private String loginMessage;
 
     /**
      * this is a constructor
@@ -126,11 +127,20 @@ public class UserBean {
     public String getMajor() {
         return major;
     }
+
+    public void setLoginMessage(String msg) {
+        loginMessage = msg;
+    }
+
+    public String getLoginMessage() {
+        return loginMessage;
+    }
     /**
      * this is for adding users
      */
     public String addUser() {
-        boolean added = userManager.addUser(id, pass, firstName, lastName, email);
+        boolean added = userManager.addUser(id, pass, firstName, lastName,
+                email, major);
         if(added) {
             return "loggedin";
         } else {
@@ -145,19 +155,26 @@ public class UserBean {
     public String login() {
         currentUser = userManager.login(id, pass);
         if(currentUser != null) {
-            rejected = false;
-            setFirstName(currentUser.getFirstName());
-            setLastName(currentUser.getLastName());
-            setEmail(currentUser.getEmail());
-            setId(currentUser.getUsername());
-            setPass(currentUser.getPassword());
-            System.out.println(currentUser.getUsername());
-            return "loggedin";
+            if(currentUser.getStatus().equalsIgnoreCase("blocked") || currentUser.getStatus().equalsIgnoreCase("banned")) {
+                setLoginMessage("Your account has been " + currentUser.getStatus());
+                rejected = true;
+                return "index";
+            } else {
+                rejected = false;
+                setFirstName(currentUser.getFirstName());
+                setLastName(currentUser.getLastName());
+                setEmail(currentUser.getEmail());
+                setId(currentUser.getUsername());
+                setPass(currentUser.getPassword());
+                System.out.println(currentUser.getUsername());
+                return "loggedin";
+            }
         }
 // FacesContext.getCurrentInstance().addMessage(null,
         //new FacesMessage(FacesMessage.SEVERITY_WARN,
         //"Invalid login", "Please try again"));
         rejected = true;
+        setLoginMessage("Wrong login credentials hhahaha");
         return "index";
     }
 

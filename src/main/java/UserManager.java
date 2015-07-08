@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class manages users
@@ -25,7 +27,7 @@ public class UserManager {
      * @return if the user was added
      */
     public boolean addUser(String id, String pass) {
-        return addUser(id, pass, "", "", "");
+        return addUser(id, pass, "", "", "","");
     }
 
     /**
@@ -37,11 +39,12 @@ public class UserManager {
      * @param email user's email
      * @return if the user was added
      */
-    public boolean addUser(String id, String pass, String fistName, String lastName, String email) {
+    public boolean addUser(String id, String pass, String fistName, String
+            lastName, String email, String major) {
         if (findUser(id)) {
             return false;
         }
-        User newUser = new User(id, pass, fistName, lastName, email);
+        User newUser = new User(id, pass, fistName, lastName, email, major);
         currUser = newUser;
         Connection con = Database.makeConnection();
         try {
@@ -271,4 +274,25 @@ public class UserManager {
         }
         return "profile";
     }
+
+    public List<User> getUserList() {
+        List<User> userList = new ArrayList<>();
+        Connection con = Database.makeConnection();
+        try {
+            Statement state = con.createStatement();
+            ResultSet result = state.executeQuery("SELECT * FROM User");
+            while (result.next()) {
+                userList.add(new User(result.getString("username"), result
+                        .getString("password"), result.getString("firstname")
+                        , result.getString("lastname"), result.getString
+                        ("email"), result.getString("major")));
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            Database.makeClosed(con);
+        }
+        return userList;
+    }
+
 }

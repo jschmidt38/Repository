@@ -19,7 +19,7 @@ public class User {
      * @param pass the password
      */
     public User(String id, String pass) {
-        this(id, pass, "", "", "");
+        this(id, pass, "", "", "","");
     }
 
     /**
@@ -27,13 +27,15 @@ public class User {
      * @param id the username
      * @param pass the password
      */
-    public User(String id, String pass, String firstName, String lastName, String email) {
+    public User(String id, String pass, String firstName, String lastName,
+                String email, String major) {
         username = id;
         password = pass;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.status = "active";
+        this.major = major;
     }
 
     /**
