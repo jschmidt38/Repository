@@ -8,25 +8,42 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
     <h:head>
+
     </h:head>
     <h:form>
-        <p:inputText value="#{restBean.keyword}" />
+        <div style="padding-top: 50px; padding-left: 80px;padding-bottom: 20px">
+        <h:panelGrid columns="6" cellpadding="5">
+        <p>
+            Search:
+        </p>
+        <p:inputText value="#{restBean.keyword}"/>
         <p:commandButton value="Search" action="#{restBean.search}" update="movietable" ajax="true"/>
         <p:commandButton value="New DVDs" action="#{restBean.dVD}" update="movietable" ajax="true"/>
-        <p:commandButton value="In Theaters" action="#{restBean.theaters}" update="movietable" ajax="true"/>
+        <p:commandButton value="In Theaters" action="#{restBean.theaters}" update="movietable" ajax="true" />
         <p:button value="Back" href="loggedin.xhtml" />
-
-        <p:dataTable id="movietable" var="movies" value="#{restBean.movieData}">
-            <p:column headerText="Go To Movie Page">
+        </h:panelGrid>
+        </div>
+        <div>
+        <p:dataTable id="movietable" var="movies" value="#{restBean.movieData}" style="padding-left: 80px; width: 650px">
+            <p:column  headerText="Go To Movie Page" style="background-color: goldenrod; color: white; width: 100px">
                 <p:commandButton value="Rate" action="#{restBean.getMovie(movies)}" ajax="false" />
             </p:column>
-            <p:column headerText="Logo">
-                <img src="#{movies.posters.thumbnail}" alt="image" />
-            <p:column headerText="Title">
-                <h:outputText value="#{movies.title}" />
+            <p:column headerText="Logo" style="background-color: white; width: 100px; color: goldenrod">
+                <a href="#{restBean.getMovie(movies)}" style="background-color: white">
+                <img src="#{movies.posters.thumbnail}" alt="image" style="padding-left: 20px"/>
+               </a>
             </p:column>
+            <p:column headerText="Title" style="background-color: goldenrod; width: 250;color: white">
+                <h:outputText value="#{movies.title}"  style="background-color: goldenrod"/>
+            </p:column>
+            <p:column headerText="Run Time" style="background-color: white; width: 100px;color: goldenrod">
+                <h:outputText value="#{movies.runtime} Minutes"  style="background-color: white"/>
+            </p:column>
+            <p:column headerText="Date In Theaters" style="background-color: goldenrod; width: 100px;color: white">
+                <h:outputText value="#{movies.releaseDates.theater}"  style="background-color: goldenrod"/>
             </p:column>
         </p:dataTable>
+    </div>
     </h:form>
 </f:view>
 </html>

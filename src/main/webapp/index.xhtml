@@ -29,10 +29,14 @@
 </h:form>
 
 <h:form id="loginForm">
+    <p:panelGrid columns="2" >
     <p:inputText value="#{userBean.id}" />
+    <p> Username</p>
     <p:password value="#{userBean.pass}" />
+    <p> Password</p>
     <p:commandButton action="#{userBean.login}" value="Submit" update="loginForm" ajax="false"/>
     <p:commandButton action="#{userBean.cancel}" value="Cancel" ajax="false"/>
+    </p:panelGrid>
     <h:outputText value="Wrong login credentials" rendered="#{userBean.rejected}" style="color: red" />
     <!--<p:button value="Facebook Connect" href="#{loginPageCode.facebookUrlAuth}" />-->
     <ui:param name="originalURL" value="#{request.requestURI}?#{request.queryString}" />

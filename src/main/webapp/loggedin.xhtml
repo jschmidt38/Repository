@@ -11,16 +11,22 @@
     <h:head>
         <p:outputLabel value="You are logged in" />
     </h:head>
-    <h:form id="Loggedin">
+    <div style="background-color: goldenrod">
+    <h:form id="Loggedin" style="padding: 50px">
         <p:button value="View Profile" href="profile.xhtml" />
         <p:button value="Search" href="search.xhtml" />
         <p:commandButton value="Logout" action="#{userBean.logout()}" ajax="false" />
     </h:form>
-    <p:dataTable id="movietable" var="movies" value="#{movieBean.recommendations}">
-        <p:column headerText="MOVIE">
+    <p:dataTable id="movietable" var="movies" value="#{movieBean.recommendations}" style="width: 500px;padding-left: 25%;padding-bottom: 45%">
+        <p:column headerText="Recommended Movies">
+        <p:column headerText="Poster">
             <img src="#{movies.posters.thumbnail}" alt="image" />
+        </p:column>
+        <p:column headerText="Title">
             <h:outputText value="#{movies.title}" />
         </p:column>
+        </p:column>
     </p:dataTable>
+    </div>
 </f:view>
 </html>
