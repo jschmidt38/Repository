@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class manages users
@@ -275,24 +273,6 @@ public class UserManager {
         return "profile";
     }
 
-    public List<User> getUserList() {
-        List<User> userList = new ArrayList<>();
-        Connection con = Database.makeConnection();
-        try {
-            Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT * FROM User");
-            while (result.next()) {
-                userList.add(new User(result.getString("username"), result
-                        .getString("password"), result.getString("firstname")
-                        , result.getString("lastname"), result.getString
-                        ("email"), result.getString("major")));
-            }
-        } catch (Exception e) {
-            e.getMessage();
-        } finally {
-            Database.makeClosed(con);
-        }
-        return userList;
-    }
+
 
 }
