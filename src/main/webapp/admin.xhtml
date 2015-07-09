@@ -8,18 +8,27 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
     <h:head>
-        <p:outputLabel value="Admin Page"/>
+        <p:outputLabel value="Admin Page"/><br/>
+        <p:button value="logout" href="index.xhtml"/>
     </h:head>
     <h:form>
         <p:dataTable id="usertable" var="users" value="#{adminManager.users}">
-            <p:column headerText="Users">
-                <p:outputLabel value="#{users.username}"/>
-                <p:outputLabel value="#{users.status}" />
-                <p:commandButton value="Ban" action="#{adminManager.ban(users)}" rendered="#{!users.isBanned()}" />
-                <p:commandButton value="Un-Ban" action="#{adminManager.unban(users)}" rendered="#{users.isBanned()}" />
-                <p:commandButton value="Unlock" action="#{adminManager.unlock(users)}" rendered="#{users.isLocked()}" />
-            </p:column>
+                <p:column headerText="Users">
+
+                    <p:outputLabel value="#{users.username}"/><br/>
+
+                    <p:outputLabel value="#{users.status}" /><br/>
+
+                    <p:commandButton value="Ban" action="#{adminManager.ban(users)}" update="usertable" rendered="#{!users.isBanned()}" />
+
+                    <p:commandButton value="Un-Ban" action="#{adminManager.unban(users)}" update="usertable" rendered="#{users.isBanned()}" />
+
+                    <p:commandButton value="Unlock" action="#{adminManager.unlock(users)}" update="usertable" rendered="#{users.isLocked()}" />
+
+                </p:column>
         </p:dataTable>
     </h:form>
+
+
 </f:view>
 </html>
