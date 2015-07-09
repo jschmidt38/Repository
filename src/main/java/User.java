@@ -150,4 +150,20 @@ public class User {
         return status;
     }
 
+    /**
+     * This is for getting locked status
+     * @return true if locked, false otherwise
+     */
+    public boolean isLocked() {
+        return (status.equals("locked"));
+    }
+
+    /**
+     * This is for getting banned status
+     * @return true if banned, locked otherwise
+     */
+    public boolean isBanned() {
+        return (status.equals("banned"));
+    }
+
 }

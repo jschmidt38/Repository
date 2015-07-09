@@ -157,6 +157,7 @@ public class UserBean {
      * This is for logging in
      */
     public String login() {
+
         currentUser = userManager.login(id, pass);
         if(currentUser != null) {
             if(currentUser.getStatus().equalsIgnoreCase("locked") || currentUser.getStatus().equalsIgnoreCase("banned")) {
