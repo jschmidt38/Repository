@@ -1,6 +1,7 @@
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.jws.soap.SOAPBinding;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,9 +15,13 @@ import java.util.ArrayList;
 @ApplicationScoped
 @SessionScoped
 public class AdminManager {
-    UserManager userManager;
+    private UserManager userManager;
+    private ArrayList<User> users;
+    private boolean isBanned = false;
+    private boolean isLock = false;
 
-    public ArrayList<User> getUserList() {
+
+    public void getUserList() {
         ArrayList<User> list = new ArrayList<User>();
         Connection con = Database.makeConnection();
         try {
@@ -30,6 +35,7 @@ public class AdminManager {
                     newUser.setLastName(result.getString("lastname"));
                     newUser.setMajor(result.getString("major"));
                     newUser.setStatus(result.getString("status"));
+
                     list.add(newUser);
             }
         } catch (SQLException e) {
@@ -38,11 +44,55 @@ public class AdminManager {
         finally {
             Database.makeClosed(con);
         }
-        return list;
+        users = list;
     }
 
     public void setStatus(String status, User user) {
         user.setStatus(status);
         userManager.updateStatus(user);
+    }
+
+    public void ban(User user) {
+        user.setStatus("banned");
+        userManager.updateStatus(user);
+    }
+
+    public void unban(User user) {
+        user.setStatus("unbanned");
+        userManager.updateStatus(user);
+    }
+
+    public void unlock(User user) {
+        user.setStatus("active");
+        userManager.updateStatus(user);
+    }
+
+    public ArrayList<User> getUsers() {
+        getUserList();
+        return users;
+    }
+
+    public boolean getBanned(User user) {
+        if(user.getStatus().equalsIgnoreCase("banned")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
+    }
+
+    public boolean getLock(User user) {
+        if(user.getStatus().equalsIgnoreCase("locked")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void setLocked(boolean locked) {
+        isLock = locked;
     }
 }

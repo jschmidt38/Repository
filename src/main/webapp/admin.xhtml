@@ -11,13 +11,13 @@
         <p:outputLabel value="Admin Page"/>
     </h:head>
     <h:form>
-        <p:dataTable id="usertable" var="users" value="#{adminManager.userList}">
+        <p:dataTable id="usertable" var="users" value="#{adminManager.users}">
             <p:column headerText="Users">
-                <p:outputLabel value="#{users.username}" />
+                <p:outputLabel value="#{users.username}"/>
                 <p:outputLabel value="#{users.status}" />
-                <p:commandButton value="Ban" action="#{adminManager.ban(users)}" rendered="#{!users.isBanned}" />
-                <p:commandButton value="Un-Ban" action="#{adminManager.unban(users)}" rendered="#{users.isBanned}" />
-                <p:commandButton value="Unlock" action="#{adminManager.unlock(users)}" rendered="#{!users.isLocked}" />
+                <p:commandButton value="Ban" action="#{adminManager.ban(users)}" rendered="#{!users.isBanned()}" />
+                <p:commandButton value="Un-Ban" action="#{adminManager.unban(users)}" rendered="#{users.isBanned()}" />
+                <p:commandButton value="Unlock" action="#{adminManager.unlock(users)}" rendered="#{users.isLocked()}" />
             </p:column>
         </p:dataTable>
     </h:form>

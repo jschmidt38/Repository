@@ -12,6 +12,8 @@ public class User {
     private String email;
     private String major;
     private String status;
+    private boolean isBanned;
+    private boolean isLocked;
 
     /**
      * simple constructor for user class
