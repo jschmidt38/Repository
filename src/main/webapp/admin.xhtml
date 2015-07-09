@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <p:outputLabel value="Admin Page"/>
+    </h:head>
+    <h:form>
+        <p:dataTable id="usertable" var="users" value="#{adminManager.userList}">
+            <p:column headerText="Users">
+                <p:outputLabel value="#{users.username}" />
+                <p:outputLabel value="#{users.status}" />
+                <p:commandButton value="Ban" action="#{adminManager.ban(users)}" rendered="#{!users.isBanned}" />
+                <p:commandButton value="Un-Ban" action="#{adminManager.unban(users)}" rendered="#{users.isBanned}" />
+                <p:commandButton value="Unlock" action="#{adminManager.unlock(users)}" rendered="#{!users.isLocked}" />
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</f:view>
+</html>

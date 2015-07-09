@@ -1,4 +1,7 @@
 import javax.faces.bean.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 
 /**
@@ -21,6 +24,7 @@ public class UserBean {
     private boolean rejected;
     private User currentUser;
     private String loginMessage;
+    private static int loginAttemp = 0;
 
     /**
      * this is a constructor
@@ -153,9 +157,10 @@ public class UserBean {
      * This is for logging in
      */
     public String login() {
+
         currentUser = userManager.login(id, pass);
         if(currentUser != null) {
-            if(currentUser.getStatus().equalsIgnoreCase("blocked") || currentUser.getStatus().equalsIgnoreCase("banned")) {
+            if(currentUser.getStatus().equalsIgnoreCase("locked") || currentUser.getStatus().equalsIgnoreCase("banned")) {
                 setLoginMessage("Your account has been " + currentUser.getStatus());
                 rejected = true;
                 return "index";
@@ -167,6 +172,9 @@ public class UserBean {
                 setId(currentUser.getUsername());
                 setPass(currentUser.getPassword());
                 System.out.println(currentUser.getUsername());
+                if(currentUser.getStatus().equalsIgnoreCase("admin")) {
+                    return "admin";
+                }
                 return "loggedin";
             }
         }
@@ -174,7 +182,28 @@ public class UserBean {
         //new FacesMessage(FacesMessage.SEVERITY_WARN,
         //"Invalid login", "Please try again"));
         rejected = true;
-        setLoginMessage("Wrong login credentials hhahaha");
+        setLoginMessage("Wrong login credentials ");
+        loginAttemp++;  // add one attemp when wrong password
+        if(loginAttemp > 3) {
+            Connection con = Database.makeConnection();
+            try {
+                Statement state = con.createStatement();
+                ResultSet result = state.executeQuery("SELECT username FROM User");
+                boolean notFound = true;
+                while (result.next() && notFound) {
+                    if(result.getString("username").equals(id)) {
+                        User tempUser = new User(id,"");
+                        tempUser.setStatus("locked");
+                        userManager.updateStatus(tempUser);
+                        loginAttemp = 0;
+                    }
+                }
+            } catch (Exception e) {
+                e.getMessage();
+            } finally {
+                Database.makeClosed(con);
+            }
+        }
         return "index";
     }
 

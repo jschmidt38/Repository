@@ -33,7 +33,7 @@
                 <img src="#{movies.posters.thumbnail}" alt="image" style="padding-left: 20px"/>
                </a>
             </p:column>
-            <p:column headerText="Title" style="background-color: goldenrod; width: 250;color: white">
+            <p:column headerText="Title" style="background-color: goldenrod; width: 250px;color: white">
                 <h:outputText value="#{movies.title}"  style="background-color: goldenrod"/>
             </p:column>
             <p:column headerText="Run Time" style="background-color: white; width: 100px;color: goldenrod">
@@ -42,6 +42,10 @@
             <p:column headerText="Date In Theaters" style="background-color: goldenrod; width: 100px;color: white">
                 <h:outputText value="#{movies.releaseDates.theater}"  style="background-color: goldenrod"/>
             </p:column>
+            <p:column headerText="Rating" style="background-color: goldenrod; width: 100px;color: white">
+                <h:outputText value="#{movies.ratings.criticsScore}"  style="background-color: goldenrod"/>
+            </p:column>
+
         </p:dataTable>
     </div>
     </h:form>
