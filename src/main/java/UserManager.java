@@ -76,7 +76,7 @@ public class UserManager {
                 }
             }
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         } finally {
             Database.makeClosed(con);
         }
@@ -143,12 +143,16 @@ public class UserManager {
     public static void updatePassword(User update) {
         Connection con = Database.makeConnection();
         try {
-            String query = "UPDATE User SET " + "password = ? " + "WHERE username = '" + update.getUsername() + "'";
+            final String query = "UPDATE User SET " + "password = ? " + "WHERE username = '" + update.getUsername() + "'";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setString(1, update.getPassword());
             preparedStmt.execute();
+            if (preparedStmt != null) {
+                preparedStmt.close();
+            }
+            con.close();
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);
@@ -167,7 +171,7 @@ public class UserManager {
             preparedStmt.setString(1, update.getFirstName());
             preparedStmt.execute();
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);
@@ -186,7 +190,7 @@ public class UserManager {
             preparedStmt.setString(1, update.getLastName());
             preparedStmt.execute();
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);
@@ -205,7 +209,7 @@ public class UserManager {
             preparedStmt.setString(1, update.getEmail());
             preparedStmt.execute();
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);
@@ -224,7 +228,7 @@ public class UserManager {
             preparedStmt.setString(1, update.getMajor());
             preparedStmt.execute();
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);
@@ -243,7 +247,7 @@ public class UserManager {
             preparedStmt.setString(1, update.getStatus());
             preparedStmt.execute();
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);

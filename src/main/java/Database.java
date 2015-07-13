@@ -33,7 +33,7 @@ public class Database {
         try {
             con.close();
         } catch (SQLException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 }
