@@ -24,7 +24,7 @@
         </h:panelGrid>
         </div>
         <div>
-        <p:dataTable id="movietable" var="movies" value="#{restBean.movieData}" style="padding-left: 80px; width: 650px">
+        <p:dataTable id="movietable" var="movies" value="#{restBean.movieData}" style="padding-left: 80px; width: 1000px">
             <p:column  headerText="Go To Movie Page" style="background-color: goldenrod; color: white; width: 100px">
                 <p:commandButton value="Rate" action="#{restBean.getMovie(movies)}" ajax="false" />
             </p:column>

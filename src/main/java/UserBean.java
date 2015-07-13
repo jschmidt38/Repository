@@ -1,6 +1,7 @@
 import javax.faces.bean.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 
@@ -156,7 +157,7 @@ public class UserBean {
     /**
      * This is for logging in
      */
-    public String login() {
+    public String login() throws SQLException {
 
         currentUser = userManager.login(id, pass);
         if(currentUser != null) {
@@ -187,8 +188,10 @@ public class UserBean {
         if(loginAttemp > 3) {
             Connection con = Database.makeConnection();
             try {
-                Statement state = con.createStatement();
-                ResultSet result = state.executeQuery("SELECT username FROM User");
+                Statement state = null;
+                ResultSet result = null;
+                state = con.createStatement();
+                result = state.executeQuery("SELECT username FROM User");
                 boolean notFound = true;
                 while (result.next() && notFound) {
                     if(result.getString("username").equals(id)) {
@@ -198,10 +201,17 @@ public class UserBean {
                         loginAttemp = 0;
                     }
                 }
+                if (state != null) {
+                    state.close();
+                }
+                if (result != null) {
+                    result.close();
+                }
             } catch (Exception e) {
-                e.getMessage();
+                System.out.println(e.getMessage());
             } finally {
                 Database.makeClosed(con);
+                con.close();
             }
         }
         return "index";

@@ -31,6 +31,7 @@ public class RatingManager {
             preparedStmt.setString(6, major);
             preparedStmt.execute();
             System.out.println("added entry to RATE");
+            preparedStmt.close();
         } catch (Exception exc) {
             System.out.printf("There is something wrong.");
             System.out.println(exc.getMessage());
@@ -57,8 +58,9 @@ public class RatingManager {
             preparedStmt.setString(4, movieTitle);
             preparedStmt.setString(5, major);
             preparedStmt.execute();
+            preparedStmt.close();
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }finally {
             Database.makeClosed(con);
         }
@@ -81,8 +83,9 @@ public class RatingManager {
             preparedStmt.setString(4, movieTitle);
             preparedStmt.setString(5, major);
             preparedStmt.execute();
+            preparedStmt.close();
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }finally {
             Database.makeClosed(con);
         }
@@ -108,6 +111,8 @@ public class RatingManager {
                         result.getString("username"), major, result.getNString("movieID"),
                         result.getString("movie")));
             }
+            state.close();
+            result.close();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -143,8 +148,10 @@ public class RatingManager {
             while (result.next()) {
                 commentList.add(result.getString("comment"));
             }
+            state.close();
+            result.close();
         } catch (Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);
@@ -172,8 +179,10 @@ public class RatingManager {
                     map.put(movieID, new MyRating(score, movieID));
                 }
             }
+            state.close();
+            result.close();
         } catch (Exception e){
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         finally {
             Database.makeClosed(con);
@@ -182,26 +191,4 @@ public class RatingManager {
         Collections.sort(list, Collections.reverseOrder());
         return list;
     }
-    /**
-     * get recommendation of movie title based on major
-     * @param major user's major
-     * @return list of movie title;
-     */
-//    public ArrayList getRecommendation(String major) {
-//        ArrayList<String> reco = new ArrayList<String>();
-//        Connection con = Database.makeConnection();
-//        try {
-//            Statement state = con.createStatement();
-//            ResultSet result = state.executeQuery("SELECT movie, major FROM comment WHERE major = \"" + major + "\"");
-//            while (result.next()) {
-//                reco.add(result.getString("movie"));
-//            }
-//        } catch (Exception e){
-//            e.getMessage();
-//        }
-//        finally {
-//            Database.makeClosed(con);
-//        }
-//        return reco;
-//    }
 }

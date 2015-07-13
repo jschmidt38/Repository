@@ -136,8 +136,9 @@ public class MyRating implements Comparable<MyRating> {
         }
         if (score < r.getScore()) {
             return -1;
+        } else {
+            return 0;
         }
-        return 0;
     }
 
     /**

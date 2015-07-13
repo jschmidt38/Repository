@@ -73,7 +73,7 @@ public class RestBean {
                 data += buffer;
             }
             conn.disconnect();
-
+            br.close();
         } catch (MalformedURLException e) {
             System.out.println("Malformed URL");
         } catch (IOException e) {
@@ -110,9 +110,9 @@ public class RestBean {
             Gson gson = new Gson();
             movie = gson.fromJson(br, Movie.class);
         } catch (MalformedURLException m) {
-            m.getMessage();
+            System.out.println(m.getMessage());
         } catch (IOException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         return movie;
     }
