@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,20 +15,30 @@ public class RatingManager {
      * @param movieID movie's id
      */
     public void storeRateAndComment(int rate, String comment, String username, String movieID, String movieTitle, String major) {
-        Connection con = Database.makeConnection();
+        Connection con = null;
+        PreparedStatement preparedStmt = null;
         try {
-            String query = "INSERT INTO comment(score, comment, username, movieID, movie, major)"
-                    + " values(?, ?, ?, ?, ?, ?)";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setInt(1, rate);
-            preparedStmt.setString(2, comment);
-            preparedStmt.setString(3, username);
-            preparedStmt.setString(4, movieID);
-            preparedStmt.setString(5, movieTitle);
-            preparedStmt.setString(6, major);
-            preparedStmt.execute();
-            System.out.println("added entry to RATE");
-            preparedStmt.close();
+            con = Database.makeConnection();
+            try {
+                String query = "INSERT INTO comment(score, comment, username, movieID, movie, major)"
+                        + " values(?, ?, ?, ?, ?, ?)";
+                preparedStmt = con.prepareStatement(query);
+                preparedStmt.setInt(1, rate);
+                preparedStmt.setString(2, comment);
+                preparedStmt.setString(3, username);
+                preparedStmt.setString(4, movieID);
+                preparedStmt.setString(5, movieTitle);
+                preparedStmt.setString(6, major);
+                preparedStmt.execute();
+                System.out.println("added entry to RATE");
+                preparedStmt.close();
+            }catch (SQLException e) {
+                System.out.print(e.getMessage());
+            } finally {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            }
         } catch (Exception exc) {
             System.out.printf("There is something wrong.");
             System.out.println(exc.getMessage());
@@ -48,17 +55,27 @@ public class RatingManager {
      * @param movieTitle
      */
     public void storeComment(String comment, String username, String movieID, String movieTitle, String major) {
-        Connection con = Database.makeConnection();
+        Connection con = null;
+        PreparedStatement preparedStmt = null;
         try {
-            String query = "INSERT INTO comment(comment, username, movieID, movie, major)" + "values(?, ?, ?, ?, ?)";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString(1, comment);
-            preparedStmt.setString(2, username);
-            preparedStmt.setString(3, movieID);
-            preparedStmt.setString(4, movieTitle);
-            preparedStmt.setString(5, major);
-            preparedStmt.execute();
-            preparedStmt.close();
+            con = Database.makeConnection();
+            try {
+                String query = "INSERT INTO comment(comment, username, movieID, movie, major)" + "values(?, ?, ?, ?, ?)";
+                preparedStmt = con.prepareStatement(query);
+                preparedStmt.setString(1, comment);
+                preparedStmt.setString(2, username);
+                preparedStmt.setString(3, movieID);
+                preparedStmt.setString(4, movieTitle);
+                preparedStmt.setString(5, major);
+                preparedStmt.execute();
+                preparedStmt.close();
+            }catch (SQLException e) {
+                System.out.print(e.getMessage());
+            } finally {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
@@ -73,17 +90,27 @@ public class RatingManager {
      * @param username
      */
     public void  storeRate(int score, String movieID, String username, String movieTitle, String major) {
-        Connection con = Database.makeConnection();
+        Connection con = null;
+        PreparedStatement preparedStmt = null;
         try {
-            String query = "INSERT INTO comment(comment, username, movieID, movie, major)" + "values(?, ?, ?, ?, ?)";
-            PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setInt(1, score);
-            preparedStmt.setString(2, username);
-            preparedStmt.setString(3, movieID);
-            preparedStmt.setString(4, movieTitle);
-            preparedStmt.setString(5, major);
-            preparedStmt.execute();
-            preparedStmt.close();
+            con = Database.makeConnection();
+            try {
+                String query = "INSERT INTO comment(comment, username, movieID, movie, major)" + "values(?, ?, ?, ?, ?)";
+                preparedStmt = con.prepareStatement(query);
+                preparedStmt.setInt(1, score);
+                preparedStmt.setString(2, username);
+                preparedStmt.setString(3, movieID);
+                preparedStmt.setString(4, movieTitle);
+                preparedStmt.setString(5, major);
+                preparedStmt.execute();
+                preparedStmt.close();
+            }catch (SQLException e) {
+                System.out.print(e.getMessage());
+            } finally {
+                if (preparedStmt != null) {
+                    preparedStmt.close();
+                }
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
@@ -98,21 +125,33 @@ public class RatingManager {
      */
     public ArrayList getRating(String movieID) {
         ArrayList<MyRating> rateList = new ArrayList<MyRating>();
-        Connection con = Database.makeConnection();
+        Connection con = null;
+        Statement state = null;
+        ResultSet result = null;
         try {
-            Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, movie, score, comment, username, major FROM comment WHERE movieID = " + movieID);
-            while (result.next()) {
-                String major = result.getString("major");
-                if (major == null) {
-                    major = "";
+            con = Database.makeConnection();
+            try {
+                state = con.createStatement();
+                result = state.executeQuery("SELECT movieID, movie, score, comment, username, major FROM comment WHERE movieID = " + movieID);
+                while (result.next()) {
+                    String major = result.getString("major");
+                    if (major == null) {
+                        major = "";
+                    }
+                    rateList.add(new MyRating((float) result.getInt("score"), result.getString("comment"),
+                            result.getString("username"), major, result.getNString("movieID"),
+                            result.getString("movie")));
                 }
-                rateList.add(new MyRating((float)result.getInt("score"), result.getString("comment"),
-                        result.getString("username"), major, result.getNString("movieID"),
-                        result.getString("movie")));
+            }catch (SQLException e) {
+                System.out.print(e.getMessage());
+            } finally {
+                if (state != null){
+                    state.close();
+                }
+                if (result != null) {
+                    result.close();
+                }
             }
-            state.close();
-            result.close();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -141,15 +180,29 @@ public class RatingManager {
      */
     public ArrayList getComment(String movieID) {
         ArrayList<String> commentList = new ArrayList<String>();
-        Connection con = Database.makeConnection();
+        Connection con = null;
+        Statement state = null;
+        ResultSet result = null;
         try {
-            Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, comment FROM comment WHERE movieID = " + movieID);
-            while (result.next()) {
-                commentList.add(result.getString("comment"));
+            con = Database.makeConnection();
+            try {
+                state = con.createStatement();
+                result = state.executeQuery("SELECT movieID, comment FROM comment WHERE movieID = " + movieID);
+                while (result.next()) {
+                    commentList.add(result.getString("comment"));
+                }
+                state.close();
+                result.close();
+            } catch (SQLException e) {
+                System.out.print(e.getMessage());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                if (result != null) {
+                    result.close();
+                }
             }
-            state.close();
-            result.close();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -166,21 +219,35 @@ public class RatingManager {
      */
     public ArrayList getRecommendation(String major) {
         HashMap<String, MyRating> map = new HashMap<String, MyRating>();
-        Connection con = Database.makeConnection();
+        Connection con = null;
+        Statement state = null;
+        ResultSet result = null;
         try {
-            Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT movieID, major, score FROM comment WHERE major = \"" + major + "\"");
-            while (result.next()) {
-                String movieID = result.getString("movieID");
-                int score = result.getInt("score");
-                if (map.containsKey(movieID)) {
-                    map.get(movieID).addRate(score);
-                } else {
-                    map.put(movieID, new MyRating(score, movieID));
+            con = Database.makeConnection();
+            try {
+                state = con.createStatement();
+                result = state.executeQuery("SELECT movieID, major, score FROM comment WHERE major = \"" + major + "\"");
+                while (result.next()) {
+                    String movieID = result.getString("movieID");
+                    int score = result.getInt("score");
+                    if (map.containsKey(movieID)) {
+                        map.get(movieID).addRate(score);
+                    } else {
+                        map.put(movieID, new MyRating(score, movieID));
+                    }
+                }
+                state.close();
+                result.close();
+            }catch (SQLException e) {
+                System.out.print(e.getMessage());
+            } finally {
+                if (state != null) {
+                    state.close();
+                }
+                if (result != null) {
+                    result.close();
                 }
             }
-            state.close();
-            result.close();
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
