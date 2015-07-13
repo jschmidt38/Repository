@@ -186,32 +186,37 @@ public class UserBean {
         setLoginMessage("Wrong login credentials ");
         loginAttemp++;  // add one attemp when wrong password
         if(loginAttemp > 3) {
-            Connection con = Database.makeConnection();
+            Connection con = null;
+            Statement state = null;
+            ResultSet result = null;
             try {
-                Statement state = null;
-                ResultSet result = null;
-                state = con.createStatement();
-                result = state.executeQuery("SELECT username FROM User");
-                boolean notFound = true;
-                while (result.next() && notFound) {
-                    if(result.getString("username").equals(id)) {
-                        User tempUser = new User(id,"");
-                        tempUser.setStatus("locked");
-                        userManager.updateStatus(tempUser);
-                        loginAttemp = 0;
+                con = Database.makeConnection();
+                try {
+                    state = con.createStatement();
+                    result = state.executeQuery("SELECT username FROM User");
+                    boolean notFound = true;
+                    while (result.next() && notFound) {
+                        if (result.getString("username").equals(id)) {
+                            User tempUser = new User(id, "");
+                            tempUser.setStatus("locked");
+                            userManager.updateStatus(tempUser);
+                            loginAttemp = 0;
+                        }
                     }
-                }
-                if (state != null) {
-                    state.close();
-                }
-                if (result != null) {
-                    result.close();
+                }catch(SQLException e){
+                    System.out.print(e.getMessage());
+                } finally {
+                    if (state != null) {
+                        state.close();
+                    }
+                    if (state != null) {
+                        result.close();
+                    }
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
                 Database.makeClosed(con);
-                con.close();
             }
         }
         return "index";
