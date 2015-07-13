@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 /**
  * Created by lingyi on 7/2/15.
+ * need javadoc
  */
 @ManagedBean(name = "adminManager")
 @ApplicationScoped
