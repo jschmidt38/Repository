@@ -181,9 +181,10 @@ public class UserManager {
         try {
         con = Database.makeConnection();
             try {
-                String query = "UPDATE User SET " + "password = ? " + "WHERE username = '" + update.getUsername() + "'";
+                String query = "UPDATE User SET " + "password = ? " + "WHERE username = " + "?" + "";
                 preparedStmt = con.prepareStatement(query);
                 preparedStmt.setString(1, update.getPassword());
+                preparedStmt.setString(2, update.getUsername());
                 preparedStmt.execute();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -211,9 +212,10 @@ public class UserManager {
         try {
             con = Database.makeConnection();
             try {
-                String query = "UPDATE User SET " + "firstname = ? " + "WHERE username = '" + update.getUsername() + "'";
+                String query = "UPDATE User SET " + "firstname = ? " + "WHERE username = " + "?" + "";
                 preparedStmt = con.prepareStatement(query);
                 preparedStmt.setString(1, update.getFirstName());
+                preparedStmt.setString(2, update.getUsername());
                 preparedStmt.execute();
             } catch (SQLException e) {
                 System.out.print(e.getMessage());
@@ -240,9 +242,10 @@ public class UserManager {
         try {
             con = Database.makeConnection();
             try {
-                String query = "UPDATE User SET " + "lastname = ? " + "WHERE username = '" + update.getUsername() + "'";
+                String query = "UPDATE User SET " + "lastname = ? " + "WHERE username = " + "?" + "";
                 preparedStmt = con.prepareStatement(query);
                 preparedStmt.setString(1, update.getLastName());
+                preparedStmt.setString(2, update.getUsername());
                 preparedStmt.execute();
             } catch (SQLException e) {
                 System.out.print(e.getMessage());
@@ -269,9 +272,10 @@ public class UserManager {
         try {
             con = Database.makeConnection();
             try {
-                String query = "UPDATE User SET " + "email = ? " + "WHERE username = '" + update.getUsername() + "'";
+                String query = "UPDATE User SET " + "email = ? " + "WHERE username = " + "?" + "";
                 preparedStmt = con.prepareStatement(query);
                 preparedStmt.setString(1, update.getEmail());
+                preparedStmt.setString(2, update.getUsername());
                 preparedStmt.execute();
             } catch (SQLException e) {
                 System.out.print(e.getMessage());
@@ -298,9 +302,10 @@ public class UserManager {
         try {
             con = Database.makeConnection();
             try {
-                String query = "UPDATE User SET " + "major = ? " + "WHERE username = '" + update.getUsername() + "'";
+                String query = "UPDATE User SET " + "major = ? " + "WHERE username = " + "?" + "";
                 preparedStmt = con.prepareStatement(query);
                 preparedStmt.setString(1, update.getMajor());
+                preparedStmt.setString(2, update.getUsername());
                 preparedStmt.execute();
             } catch (SQLException e) {
                 System.out.print(e.getMessage());
