@@ -208,7 +208,7 @@ public class UserBean {
                     if (state != null) {
                         state.close();
                     }
-                    if (state != null) {
+                    if (result != null) {
                         result.close();
                     }
                 }

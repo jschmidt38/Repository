@@ -6,6 +6,10 @@ import java.util.List;
 
 @Generated("org.jsonschema2pojo")
 public class AbridgedCast {
+    public AbridgedCast() {
+        name = "";
+        id = "";
+    }
 
     @Expose
     private String name;
