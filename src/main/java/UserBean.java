@@ -179,16 +179,13 @@ public class UserBean {
                 return "loggedin";
             }
         }
-// FacesContext.getCurrentInstance().addMessage(null,
-        //new FacesMessage(FacesMessage.SEVERITY_WARN,
-        //"Invalid login", "Please try again"));
         rejected = true;
         setLoginMessage("Wrong login credentials ");
         loginAttemp++;  // add one attemp when wrong password
+        Connection con = null;
+        Statement state = null;
+        ResultSet result = null;
         if(loginAttemp > 3) {
-            Connection con = null;
-            Statement state = null;
-            ResultSet result = null;
             try {
                 con = Database.makeConnection();
                 try {
@@ -216,7 +213,13 @@ public class UserBean {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
-                Database.makeClosed(con);
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
         return "index";

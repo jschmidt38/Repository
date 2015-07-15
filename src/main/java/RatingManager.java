@@ -8,6 +8,12 @@ import java.util.HashMap;
  */
 public class RatingManager {
     /**
+     * constructor for Rating Manager
+     */
+    public RatingManager() {
+
+    }
+    /**
      * for storing the rate and comment
      * @param rate score
      * @param comment user's comment
@@ -43,7 +49,13 @@ public class RatingManager {
             System.out.printf("There is something wrong.");
             System.out.println(exc.getMessage());
         } finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -79,7 +91,13 @@ public class RatingManager {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -114,7 +132,13 @@ public class RatingManager {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -156,7 +180,13 @@ public class RatingManager {
             System.out.println(e.getMessage());
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return rateList;
     }
@@ -207,7 +237,13 @@ public class RatingManager {
             System.out.println(e.getMessage());
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return commentList;
     }
@@ -252,7 +288,13 @@ public class RatingManager {
             System.out.println(e.getMessage());
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         ArrayList<MyRating> list = new ArrayList<MyRating>(map.values());
         Collections.sort(list, Collections.reverseOrder());

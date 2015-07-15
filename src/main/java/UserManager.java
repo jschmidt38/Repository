@@ -68,7 +68,13 @@ public class UserManager {
         } catch (Exception exc) {
             System.out.printf("There is something wrong.");
         } finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return false;
     }
@@ -99,7 +105,13 @@ public class UserManager {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return false;
     }
@@ -138,7 +150,13 @@ public class UserManager {
         } catch (Exception e) {
             System.out.print(e.getMessage());
         } finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }
@@ -197,7 +215,13 @@ public class UserManager {
             System.out.print(e.getMessage());
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
@@ -228,7 +252,13 @@ public class UserManager {
             System.out.println(e.getMessage());
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -258,7 +288,13 @@ public class UserManager {
             System.out.println(e.getMessage());
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -288,7 +324,13 @@ public class UserManager {
             System.out.println(e.getMessage());
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -318,7 +360,13 @@ public class UserManager {
             System.out.println(e.getMessage());
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -348,7 +396,13 @@ public class UserManager {
             System.out.println(e.getMessage());
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

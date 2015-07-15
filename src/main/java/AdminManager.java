@@ -1,7 +1,6 @@
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.jws.soap.SOAPBinding;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,11 +26,15 @@ public class AdminManager {
      */
     public void getUserList() {
         ArrayList<User> list = new ArrayList<User>();
-        Connection con = Database.makeConnection();
+        Connection con = null;
+        Statement state = null;
+        ResultSet result = null;
         try {
-            Statement state = con.createStatement();
-            ResultSet result = state.executeQuery("SELECT username, status, firstname, lastname, email, major FROM User");
-            while (result.next()) {
+            con = Database.makeConnection();
+            try {
+                state = con.createStatement();
+                result = state.executeQuery("SELECT username, status, firstname, lastname, email, major FROM User");
+                while (result.next()) {
                     String ID = result.getString("username");
                     User newUser = new User(ID, "");
                     newUser.setEmail(result.getString("email"));
@@ -39,15 +42,31 @@ public class AdminManager {
                     newUser.setLastName(result.getString("lastname"));
                     newUser.setMajor(result.getString("major"));
                     newUser.setStatus(result.getString("status"));
-                    if(!newUser.getStatus().equalsIgnoreCase("admin")) {
+                    if (!newUser.getStatus().equalsIgnoreCase("admin")) {
                         list.add(newUser);
                     }
+                }
+            } catch (SQLException e) {
+                System.out.print(e.getMessage());
+            }finally {
+                if (state != null) {
+                    state.close();
+                }
+                if (result != null) {
+                    result.close();
+                }
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         finally {
-            Database.makeClosed(con);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         users = list;
     }
@@ -139,4 +158,11 @@ public class AdminManager {
     public void setLocked(boolean locked) {
         isLock = locked;
     }
+    public boolean getBanned() {
+        return isBanned;
+    }
+    public boolean getLocked() {
+        return isLock;
+    }
 }
+
