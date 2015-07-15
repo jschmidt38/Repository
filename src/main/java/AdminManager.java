@@ -35,8 +35,8 @@ public class AdminManager {
                 state = con.createStatement();
                 result = state.executeQuery("SELECT username, status, firstname, lastname, email, major FROM User");
                 while (result.next()) {
-                    String ID = result.getString("username");
-                    User newUser = new User(ID, "");
+                    String iD = result.getString("username");
+                    User newUser = new User(iD, "");
                     newUser.setEmail(result.getString("email"));
                     newUser.setFirstName(result.getString("firstname"));
                     newUser.setLastName(result.getString("lastname"));

@@ -126,9 +126,9 @@ public class UserManager {
                 result = state.executeQuery("SELECT * FROM User");
                 while (result.next()) {
                     if (result.getString("username").equals(id) && result.getString("password").equals(pass)) {
-                        String ID = result.getString("username");
+                        String iD = result.getString("username");
                         String passWord = result.getString("password");
-                        User newUser = new User(ID, passWord);
+                        User newUser = new User(iD, passWord);
                         newUser.setEmail(result.getString("email"));
                         newUser.setFirstName(result.getString("firstname"));
                         newUser.setLastName(result.getString("lastname"));
