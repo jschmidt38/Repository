@@ -27,8 +27,6 @@ public class UserSessionBean implements Serializable {
     private String            originalURL;
     private String            providerID;
     private Profile             profile;
-    UserManager userManager = new UserManager();
-    User curr;
     public UserSessionBean() {
 
     }

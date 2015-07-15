@@ -35,8 +35,8 @@ public class AdminManager {
                 state = con.createStatement();
                 result = state.executeQuery("SELECT username, status, firstname, lastname, email, major FROM User");
                 while (result.next()) {
-                    String ID = result.getString("username");
-                    User newUser = new User(ID, "");
+                    String iD = result.getString("username");
+                    User newUser = new User(iD, "");
                     newUser.setEmail(result.getString("email"));
                     newUser.setFirstName(result.getString("firstname"));
                     newUser.setLastName(result.getString("lastname"));
@@ -123,11 +123,7 @@ public class AdminManager {
      * @return
      */
     public boolean getBanned(User user) {
-        if(user.getStatus().equalsIgnoreCase("banned")) {
-            return true;
-        } else {
-            return false;
-        }
+        return user.getStatus().equalsIgnoreCase("banned");
     }
 
     /**
@@ -144,11 +140,7 @@ public class AdminManager {
      * @return status of the user
      */
     public boolean getLock(User user) {
-        if(user.getStatus().equalsIgnoreCase("locked")) {
-            return true;
-        } else {
-            return false;
-        }
+        return  user.getStatus().equalsIgnoreCase("locked");
     }
 
     /**

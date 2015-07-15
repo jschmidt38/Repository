@@ -15,7 +15,8 @@ import java.sql.Statement;
 @RequestScoped
 public class UserBean {
     @ManagedProperty("#{userManager}")
-    UserManager userManager;
+    private UserManager userManager;
+
     private String id;
     private String pass;
     private String firstName;
@@ -26,6 +27,7 @@ public class UserBean {
     private User currentUser;
     private String loginMessage;
     private static int loginAttemp = 0;
+    private static final int LOCKED_COUNT = 3;
 
     /**
      * this is a constructor
@@ -185,7 +187,7 @@ public class UserBean {
         Connection con = null;
         Statement state = null;
         ResultSet result = null;
-        if(loginAttemp > 3) {
+        if(loginAttemp > LOCKED_COUNT) {
             try {
                 con = Database.makeConnection();
                 try {

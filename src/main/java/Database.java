@@ -6,7 +6,13 @@ import java.sql.SQLException;
 /**
  * Created by lingyi on 6/19/15.
  */
-public class Database {
+public final class Database {
+    /**
+     * Private constructor for utility class
+     */
+    private Database() {
+
+    }
     /**
      * make connection with databse
      * @return connection

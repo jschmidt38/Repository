@@ -25,6 +25,7 @@ public class RestBean {
     private String keyword;
     private List<Movie> movieData;
     private Movie currMovie;
+    private static final int HTTP_ERROR = 200;
 
     /**
      * this is a constructor
@@ -62,7 +63,7 @@ public class RestBean {
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
 
-            if (conn.getResponseCode() != 200) {
+            if (conn.getResponseCode() != HTTP_ERROR) {
                 throw new RuntimeException("Failed: HTTP error code: " + conn.getResponseCode());
             }
 

@@ -10,14 +10,14 @@ import java.util.ArrayList;
 @RequestScoped
 public class MovieBean {
     @ManagedProperty("#{userManager}")
-    UserManager userManager;
+    private UserManager userManager;
     @ManagedProperty("#{restBean}")
-    RestBean restBean;
+    private RestBean restBean;
 
-    Movie movie;
-    RatingManager ratingManager;
-    String comment;
-    int score = -1;
+    private Movie movie;
+    private RatingManager ratingManager;
+    private String comment;
+    private int score = -1;
 
     /**
      * Constructor for MovieBean
