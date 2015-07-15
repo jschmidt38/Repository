@@ -66,7 +66,7 @@ public class RestBean {
                 throw new RuntimeException("Failed: HTTP error code: " + conn.getResponseCode());
             }
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
             data = "";
             String buffer;
             while ((buffer = br.readLine()) != null) {
@@ -105,7 +105,7 @@ public class RestBean {
             String url = "http://api.rottentomatoes.com/api/public/v1.0/movies/"+id
                     +".json?apikey=yedukp76ffytfuy24zsqk7f5";
             URL newUrl = new URL(url);
-            InputStreamReader isr = new InputStreamReader(newUrl.openStream());
+            InputStreamReader isr = new InputStreamReader(newUrl.openStream(), "UTF-8");
             BufferedReader br = new BufferedReader(isr);
             Gson gson = new Gson();
             movie = gson.fromJson(br, Movie.class);
