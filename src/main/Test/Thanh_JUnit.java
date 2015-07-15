@@ -9,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Thanh on 7/13/15.
  */
-public class Testing {
+public class Thanh_JUnit {
 
     UserManager manager;
 
