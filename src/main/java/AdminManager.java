@@ -123,11 +123,7 @@ public class AdminManager {
      * @return
      */
     public boolean getBanned(User user) {
-        if(user.getStatus().equalsIgnoreCase("banned")) {
-            return true;
-        } else {
-            return false;
-        }
+        return user.getStatus().equalsIgnoreCase("banned");
     }
 
     /**
@@ -144,11 +140,7 @@ public class AdminManager {
      * @return status of the user
      */
     public boolean getLock(User user) {
-        if(user.getStatus().equalsIgnoreCase("locked")) {
-            return true;
-        } else {
-            return false;
-        }
+        return  user.getStatus().equalsIgnoreCase("locked");
     }
 
     /**

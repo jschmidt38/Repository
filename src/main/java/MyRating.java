@@ -3,6 +3,7 @@
  * Created by lingyi on 6/27/15.
  */
 public class MyRating implements Comparable<MyRating> {
+
     private String comment;
     private String movieID;
     private String username;

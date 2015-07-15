@@ -155,7 +155,7 @@ public class User {
      * @return true if locked, false otherwise
      */
     public boolean isLocked() {
-        return (status.equals("locked"));
+        return "locked".equals(status);
     }
 
     /**
@@ -163,7 +163,7 @@ public class User {
      * @return true if banned, locked otherwise
      */
     public boolean isBanned() {
-        return (status.equals("banned"));
+        return "banned".equals(status);
     }
 
 }
