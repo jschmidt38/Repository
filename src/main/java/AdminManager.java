@@ -15,7 +15,7 @@ import java.util.ArrayList;
 @ApplicationScoped
 @SessionScoped
 public class AdminManager {
-    private UserManager userManager;
+    private UserManager userManager = new UserManager();
     private ArrayList<User> users;
     private boolean isBanned = false;
     private boolean isLock = false;

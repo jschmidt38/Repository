@@ -142,6 +142,21 @@ public class MyRating implements Comparable<MyRating> {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if(o != null && o instanceof MyRating) {
+            MyRating rate = (MyRating) o;
+            return rate.numRates == this.numRates;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return this.numRates;
+    }
+
     /**
      * Method to add rate by averaging scores
      * @param score the new score to add
