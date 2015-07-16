@@ -1,7 +1,9 @@
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by lingyi on 6/19/15.
@@ -19,39 +21,19 @@ public final class Database {
      */
     public static Connection makeConnection() {
         Connection con = null;
-        String pass = null;
-        String filename = "password.txt";
-        InputStream in = null;
-        Reader reader = null;
-        BufferedReader br = null;
+        String pass = "eZ3!iB2!";
+        Properties properties = new Properties();
         try {
-            in = new FileInputStream(filename);
-            reader = new InputStreamReader(in, "UTF-8");
-            br = new BufferedReader(reader);
-            try {
-                pass = br.readLine();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.print(e.getMessage());
-        } catch (UnsupportedEncodingException e) {
-            System.out.print(e.getMessage());
-        } finally {
-            if (reader != null){
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            try (InputStream in = Database.class.getResourceAsStream("password")) {
+                if (in == null) {
+                    throw new NullPointerException("DBproperties does not"
+                            + " exist");
                 }
+                properties.load(in);
+                pass = properties.getProperty("password");
             }
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        } catch (IOException | NullPointerException ex) {
+            System.out.print(ex.getMessage());
         }
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
