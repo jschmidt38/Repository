@@ -6,6 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+
 public class John_JUnit {
 
     User user;
@@ -20,10 +21,10 @@ public class John_JUnit {
     @Before
     public void setUp() {
         user = new User("User","Pass");
-        user1 = new User(NULL, NULL);
-        user2 = new User(NULL, NULL, NULL, NULL, NULL, NULL);
+        user1 = new User(null, null);
+        user2 = new User(null,null,null,null,null,null);
         user3 = new User("HELLO","WORLD","AND", "ALL", "YOU", "PEOPLE");
-        user4 = new User("NULL",NULL,NULL,"EXCEPTION","","ABABABABABABABBBABBABABABABABABABABABABAB");
+        user4 = new User("NULL",null,null,"EXCEPTION","","ABABABABABABABBBABBABABABABABABABABABABAB");
         user5 = new User("","");
     }
 
@@ -40,8 +41,8 @@ public class John_JUnit {
 
     @Test
     public void testNull() {
-        assertNULL(user1.getUsername());
-        assertNULL(user1.getPassword());
+        assertNull(user1.getUsername());
+        assertNull(user1.getPassword());
         assertEquals("", user1.getFirstName());
         assertEquals("", user1.getLastName());
         assertEquals("", user1.getEmail());
@@ -50,12 +51,12 @@ public class John_JUnit {
 
     @Test
     public void testLotsOfNull() {
-        assertNULL(user2.getUsername());
-        assertNULL(user2.getPassword());
-        assertNULL(user2.getFirstName());
-        assertNULL(user2.getLastName());
-        assertNULL(user2.getEmail());
-        assertNULL(user2.getMajor());
+        assertNull(user2.getUsername());
+        assertNull(user2.getPassword());
+        assertNull(user2.getFirstName());
+        assertNull(user2.getLastName());
+        assertNull(user2.getEmail());
+        assertNull(user2.getMajor());
     }
 
     public void testLongNormal() {
@@ -72,8 +73,8 @@ public class John_JUnit {
     @Test
     public void testLongandNull() {
         assertEquals("NULL", user4.getUsername());
-        assertNULL(user4.getPassword());
-        assertNULL(user4.getFirstName());
+        assertNull(user4.getPassword());
+        assertNull(user4.getFirstName());
         assertEquals("EXCEPTION", user4.getLastName());
         assertEquals("", user4.getEmail());
         assertEquals("ABABABABABABABBBABBABABABABABABABABABABAB", user4.getMajor());
