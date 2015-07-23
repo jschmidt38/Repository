@@ -7,11 +7,17 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
+    <style type="text/css">
+        body {
+            background-image: url("resources/image/Logo_Large.png");
+            background-color: gold;
+        }
+    </style>
 </f:view>
+
+
 <h:head>
-    <div style="padding-left: 40%;padding-right: 50%;padding-top: 5%">
-    <h:outputLabel value="Please Login"/>
-    </div>
+
 </h:head>
 <h:form>
     <div style="padding-left: 40%;padding-right: 50%;padding-top: 1%">
@@ -33,6 +39,7 @@
 </h:form>
 
 <h:form id="loginForm">
+    <h:outputLabel value="Please Login"/>
 <div style="padding-left: 40%;padding-right: 50%;padding-top: 10%">
     <p:panelGrid columns="2" style="padding:25%">
     <p:inputText value="#{userBean.id}" />
@@ -44,7 +51,8 @@
     </p:panelGrid>
     <h:outputText value="#{userBean.loginMessage}" rendered="#{userBean.rejected}"
                   style="color: red" />
-    <!--<p:button value="Facebook Connect" href="#{loginPageCode.facebookUrlAuth}" />-->
+
+    <p:button value="Facebook Connect" href="#{loginPageCode.facebookUrlAuth}" />
     <ui:param name="originalURL" value="#{request.requestURI}?#{request.queryString}" />
 
     <f:metadata>
